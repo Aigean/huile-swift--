@@ -1,0 +1,56 @@
+//
+//  CashRecordController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CashRecordController.h"
+#import "CardrecordCell.h"
+
+@interface CashRecordController ()<UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic , strong)UITableView * tableview;
+@end
+
+@implementation CashRecordController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title =@"提现记录";
+    [self initsubview];
+    
+}
+#pragma mark  methods
+-(void)initsubview{
+    _tableview = [UITableView initWithTableView:CGRectMake(0, 10, SCREENWIDTH, SCREENHEIGHT-74) withDelegate:self];
+    [self.view addSubview:_tableview];
+}
+#pragma mark -delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+    
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CardrecordCell * cell = [CardrecordCell cellWithTableView:tableView];
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,75 @@
+//
+//  PaymentTableViewCell.m
+//  huile
+//
+//  Created by mac on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "PaymentTableViewCell.h"
+
+@implementation PaymentTableViewCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"PaymentTableViewCell";
+    PaymentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[PaymentTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return cell;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initViews];
+    }
+    return self;
+}
+
+- (void)initViews
+{
+    _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MainScreen_Width, 80)];
+    _backView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:_backView];
+    
+    //左边图片
+    _leftImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 60, 60)];
+    _leftImgView.backgroundColor = [UIColor cyanColor];
+    _leftImgView.image = [UIImage imageNamed:@"tubiao"];
+    [_backView addSubview:_leftImgView];
+    
+    _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 10, MainScreen_Width-150, 20)];
+    _nameLabel.text = @"店铺名称";
+    _nameLabel.font = [UIFont systemFontOfSize:14];
+    [_backView addSubview:_nameLabel];
+    
+//    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, CGRectGetMaxY(_starImg.frame), MainScreen_Width-80, 20)];
+//    _titleLabel.text = @"七天无理由退款";
+//    _titleLabel.textColor = [UIColor redColor];
+//    _titleLabel.font = [UIFont systemFontOfSize:12];
+//    [_backView addSubview:_titleLabel];
+//    
+//    _discountLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, CGRectGetMaxY(_titleLabel.frame), 80, 20)];
+//    _discountLabel.text = @"九折";
+//    _discountLabel.numberOfLines = 0;
+//    _discountLabel.textColor = [UIColor redColor];
+//    _discountLabel.font = [UIFont systemFontOfSize:14];
+//    [_backView addSubview:_discountLabel];
+//    
+//    _numberLabel = [[UILabel alloc]initWithFrame:CGRectMake(MainScreen_Width-100, CGRectGetMaxY(_titleLabel.frame)+5, 100, 20)];
+//    _numberLabel.text = @"已有1000人支付";
+//    _numberLabel.textAlignment = NSTextAlignmentCenter;
+//    _numberLabel.font = [UIFont systemFontOfSize:12];
+//    [_backView addSubview:_numberLabel];
+//    
+//    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 99, MainScreen_Width, 1)];
+//    line.backgroundColor = [UIColor lightGrayColor];
+//    [_backView addSubview:line];
+}
+
+
+@end

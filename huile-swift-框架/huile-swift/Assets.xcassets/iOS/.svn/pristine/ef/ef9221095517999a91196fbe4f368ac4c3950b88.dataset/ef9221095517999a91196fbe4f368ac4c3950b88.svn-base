@@ -1,0 +1,35 @@
+//
+//  CardView.m
+//  huile
+//
+//  Created by LZJ on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CardView.h"
+
+@implementation CardView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+       
+        
+    [self initsubview];
+    }
+    return self;
+}
+#pragma mark --加载视图
+-(void)initsubview{
+    _imgs = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50*Width, 100*Width, 50*Hight)];
+    _imgs.backgroundColor = [UIColor blueColor];
+    _lable1 = [UILabel labelWithFrame:CGRectMake(_imgs.right+10, 20*Hight, 100, 40) text:@"xx银行" font:14 textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft];
+    _lable2 = [UILabel labelWithFrame:CGRectMake(_imgs.right+10, 5+_lable1.bottom, 100, 20) text:@"储蓄卡" font:11 textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft];
+    _lable3 = [UILabel labelWithFrame:CGRectMake(_imgs.right+10, 5+_lable2.bottom, 200, 20) text:@"12112121212112" font:11 textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft];
+    [self addSubview:_imgs];
+    [self addSubview:_lable1];
+    [self addSubview:_lable2];
+    [self addSubview:_lable3];
+
+}
+@end

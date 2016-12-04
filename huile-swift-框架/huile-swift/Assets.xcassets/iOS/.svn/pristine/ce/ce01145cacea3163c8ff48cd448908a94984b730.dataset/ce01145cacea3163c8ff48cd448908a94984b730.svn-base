@@ -1,0 +1,13 @@
+//
+//  AnnotationModel.m
+//  huile
+//
+//  Created by  周毅 on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "AnnotationModel.h"
+
+@implementation AnnotationModel
+
+@end

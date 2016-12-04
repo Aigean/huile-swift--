@@ -1,0 +1,67 @@
+//
+//  PasswordController.m
+//  huile
+//
+//  Created by LZJ on 16/3/23.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "PasswordController.h"
+
+@interface PasswordController ()
+
+@end
+
+@implementation PasswordController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initsubview];
+}
+#pragma mark --methods
+-(void)initsubview{
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(0, 10*Hight, SCREENWIDTH, 44*Hight)];
+    _field.backgroundColor = [UIColor whiteColor];
+    _field.borderStyle = UITextBorderStyleNone;
+    _field.placeholder = @"  输入原密码";
+    _field1 = [[UITextField alloc] initWithFrame:CGRectMake(0, 1*Hight+_field.bottom, SCREENWIDTH, 44*Hight)];
+    _field1.backgroundColor = [UIColor whiteColor];
+    _field1.borderStyle = UITextBorderStyleNone;
+    _field1.placeholder = @"  输入新密码";
+    _field2 = [[UITextField alloc] initWithFrame:CGRectMake(0, 1*Hight+_field1.bottom, SCREENWIDTH, 44*Hight)];
+    _field2.backgroundColor = [UIColor whiteColor];
+    _field2.borderStyle = UITextBorderStyleNone;
+    _field2.placeholder = @"  输入新密码";
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, _field2.bottom +40, SCREENWIDTH-20, 44) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:17 textColor:[UIColor whiteColor]];
+    button.layer.cornerRadius =8.0;
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_field];
+    [self.view addSubview:_field1];
+    [self.view addSubview:_field2];
+    [self.view addSubview:button];
+}
+#pragma mark -- action
+-(void)push{
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,58 @@
+//
+//  BoutiqueShopViewController.m
+//  huile
+//
+//  Created by mac on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "BoutiqueShopViewController.h"
+#import "BoutiqueViewCell.h"
+
+@interface BoutiqueShopViewController ()
+
+@end
+
+@implementation BoutiqueShopViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+//精品店铺
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.rowHeight = MainScreen_Height/5+10;
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return 4;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BoutiqueViewCell *cell = [BoutiqueViewCell cellWithTableView:tableView];
+    
+    return cell;
+}
+
+
+
+@end

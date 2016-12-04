@@ -1,0 +1,57 @@
+//
+//  pswsureController.m
+//  huile
+//
+//  Created by LZJ on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "pswsureController.h"
+#import "PasswordInput.h"
+
+@interface pswsureController ()
+
+@end
+
+@implementation pswsureController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"修改支付密码";
+    [self initsubview];
+}
+#pragma mark initmethod
+-(void)initsubview{
+    UILabel * lable  = [UILabel labelWithFrame:CGRectMake(0, 0, SCREENWIDTH, 60*Hight) text:@"确定新支付密码" font:18 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    PasswordInput * inputview = [[PasswordInput alloc] initWithFrame:CGRectMake(10*Width, lable.bottom+10*Hight, SCREENWIDTH-20*Width, 45*Hight)];
+    inputview.backgroundColor = [UIColor whiteColor];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, inputview.bottom +40, SCREENWIDTH-20, 44) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:22 textColor:[UIColor whiteColor]];
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:lable];
+    [self.view addSubview:inputview];
+    [self.view addSubview:button];
+    
+}
+#pragma mark - action
+-(void)push{
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

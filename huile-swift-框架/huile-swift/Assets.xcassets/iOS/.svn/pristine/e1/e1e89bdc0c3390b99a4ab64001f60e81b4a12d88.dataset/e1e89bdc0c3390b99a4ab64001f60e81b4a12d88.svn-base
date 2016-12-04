@@ -1,0 +1,32 @@
+//
+//  ThirdViewCell.h
+//  huile
+//
+//  Created by mac on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+
+@protocol ThirdDelegate <NSObject>
+
+@optional
+-(void)didSelectRushIndex:(NSInteger )index;
+@end
+
+
+@interface ThirdViewCell : UITableViewCell
+
+@property(nonatomic,strong)UIView      *backView;
+@property(nonatomic,strong)UIButton    *leftbutton;
+@property(nonatomic,strong)UIButton    *topbutton;
+@property(nonatomic,strong)UIButton    *bottombutton;
+
+@property (nonatomic, strong) UIView   *striping;
+@property (nonatomic, strong) UIView   *vertical_line;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
+@property(nonatomic, assign) id<ThirdDelegate> delegate;
+@end

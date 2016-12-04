@@ -1,0 +1,48 @@
+//
+//  NavigationViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "NavigationController.h"
+
+@interface NavigationController ()
+
+@end
+
+@implementation NavigationController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // 设置导航条的颜色
+    self.navigationBar.translucent = NO;
+    self.navigationBar.barTintColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    
+}
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.viewControllers.count > 0) {
+        [viewController.view setBackgroundColor:TFColor(240, 240, 240, 1)];
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(back) image:@"left arrow-full" highImage:nil];
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    
+    [super pushViewController:viewController animated:animated];
+}
+
+- (void)back
+{
+    [self popViewControllerAnimated:YES];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+   
+}
+
+
+@end

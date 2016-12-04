@@ -1,0 +1,75 @@
+//
+//  ModifiedController.m
+//  huile
+//
+//  Created by LZJ on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "ModifiedController.h"
+#import "PersonViewController.h"
+#import "MBProgressHUD+UP.h"
+#define ModifiedName @"ModifiedName"
+@interface ModifiedController ()
+
+@end
+
+@implementation ModifiedController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"修改昵称";
+    [self initsubview];
+    
+}
+#pragma mark -initsubview
+-(void)initsubview{
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    _field.keyboardType =UIKeyboardTypeASCIICapable
+    ;
+    _field.font = [UIFont systemFontOfSize:14];
+    UILabel *paddingView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 25)];
+    paddingView.text = @"昵称:";
+    paddingView.font=[UIFont systemFontOfSize:14];
+    paddingView.backgroundColor = [UIColor clearColor];
+    paddingView.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    _field.leftView = paddingView;
+    _field.leftViewMode = UITextFieldViewModeAlways;
+    _field.backgroundColor = [UIColor whiteColor];
+    _field.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    _field.placeholder =@"  请输入您的新昵称：";
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, _field.bottom +30, SCREENWIDTH-20, 44) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:17 textColor:[UIColor whiteColor]];
+    button.layer.cornerRadius = 8.0;
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    [button addTarget:self action:@selector(BtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_field];
+    [self.view addSubview:button];
+    
+    }
+#pragma mark  touch
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+#pragma mark   action
+-(void)BtnClicked:(id)sender{
+    [MBProgressHUD showSuccess:@"成功"];
+    //传递参数
+    [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedName object:nil userInfo:@{@"text":_field.text}];
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,60 @@
+//
+//  Detailssss.m
+//  huile
+//
+//  Created by  周毅 on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "Detailssss.h"
+#import "Detail.h"
+
+@interface Detailssss() <UITableViewDelegate,UITableViewDataSource>
+
+
+@end
+
+@implementation Detailssss
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UITableView *tableview = [[UITableView  alloc]init];
+        tableview.frame = KCGRECT(0, 0, 750, 630);
+        
+        tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self addSubview:tableview];
+        
+        
+        tableview.dataSource = self;
+        tableview.delegate = self;
+        
+    }
+    return self;
+}
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+       Detail *cell = [Detail cellWithTableView:tableView];
+       return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 208.0/1334*SCREEN_HEIGHT;
+}
+
+@end

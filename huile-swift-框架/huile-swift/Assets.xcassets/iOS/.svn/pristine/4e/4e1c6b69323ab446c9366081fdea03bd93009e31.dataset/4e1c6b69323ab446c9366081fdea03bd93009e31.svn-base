@@ -1,0 +1,75 @@
+//
+//  RechargeController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "RechargeController.h"
+#import "RechargetowController.h"
+#import "chargerecordController.h"
+
+@interface RechargeController ()
+
+@end
+
+@implementation RechargeController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"充值";
+    [self initsubview];
+}
+#pragma mark  methods
+-(void)initsubview{
+
+    UIButton * Btn = [UIButton butonWithFrame:CGRectMake(0, 0, 60, 35) buttonType:UIButtonTypeCustom imageNamed:nil text:@"交易记录" textFont:14 textColor:[UIColor colorWithHex:@"999999" andAlpha:1]];
+    [Btn addTarget:self action:@selector(push1) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    UILabel * lable =[UILabel labelWithFrame:CGRectMake(10, 0, 100*Width, 44*Hight) text:@"金额（元）：" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(lable.right, 0, SCREENWIDTH-50*Width, 44*Hight)];
+    _field.borderStyle = UITextBorderStyleNone;
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 10*Hight, SCREENWIDTH, 44*Hight)];
+    view.backgroundColor =[UIColor whiteColor];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, _field.bottom +60, SCREENWIDTH-20, 44) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:17 textColor:[UIColor whiteColor]];
+    button.layer.cornerRadius = 8.0;
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:lable];
+    [view addSubview:_field];
+    [self.view addSubview:button];
+    [self.view addSubview:view];
+}
+#pragma mark action
+-(void)push{
+    RechargetowController * vc = [[RechargetowController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+-(void)push1{
+    chargerecordController * vc = [[chargerecordController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

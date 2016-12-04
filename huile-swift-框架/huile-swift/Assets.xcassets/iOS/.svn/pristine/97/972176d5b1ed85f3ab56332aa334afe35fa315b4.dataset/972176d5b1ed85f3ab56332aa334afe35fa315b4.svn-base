@@ -1,0 +1,217 @@
+//
+//  AllReviewViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/25.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "AllReviewViewController.h"
+#import "FeedbackCell.h"
+
+@interface AllReviewViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) UIScrollView *scrollViewMain;
+
+@property (nonatomic, weak) UIButton *btnPraise;
+@property (nonatomic, weak) UIButton *btnMedium;
+@property (nonatomic, weak) UIButton *btnBad;
+@property (nonatomic, weak) FeedbackCell *cell;
+
+//@property (nonatomic, weak) UITableView *tableViewPraise;
+//@property (nonatomic, weak) UITableView *tableViewMedium;
+//@property (nonatomic, weak) UITableView *tableViewBad;
+@property (nonatomic, weak) UITableView *tableView;
+
+@end
+
+@implementation AllReviewViewController
+
+
+- (UIScrollView *)scrollViewMain
+{
+    if (_scrollViewMain == nil) {
+        _scrollViewMain = [[UIScrollView alloc]init];
+    }
+    return _scrollViewMain;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+     self.navigationItem.title = @"全部评论";
+    
+    UIButton *btnPraise = [self addBtnWithTitle:@"好评(122)" frame:CGRectMake(0,0,SCREEN_WIDTH/3,45) action:@selector(btnPraiseClick)];
+    self.btnPraise = btnPraise;
+    [btnPraise setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    
+    
+    UIButton *btnMedium = [self addBtnWithTitle:@"中评(122)" frame:CGRectMake(SCREEN_WIDTH/3, 0, SCREEN_WIDTH/3, 45) action:@selector(btnMediumClick)];
+    self.btnMedium = btnMedium;
+    
+    UIButton *btnBad = [self addBtnWithTitle:@"差评(122)" frame:CGRectMake(SCREEN_WIDTH*2/3, 0, SCREEN_WIDTH/3, 45) action:@selector(btnBadClick)];
+    self.btnBad = btnBad;
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH *3, 1)];
+    line.backgroundColor = [UIColor colorWithHex:@"cccccc" andAlpha:1.0f];
+    [self.view addSubview:line];
+                    
+    
+    [self.view addSubview:btnPraise];
+    [self.view addSubview:btnMedium];
+    [self.view addSubview:btnBad];
+    
+    self.scrollViewMain.frame = CGRectMake(0, 46, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.scrollViewMain.contentSize = CGSizeMake(SCREEN_WIDTH * 3, SCREEN_HEIGHT);
+    self.scrollViewMain.pagingEnabled = YES;
+    self.scrollViewMain.showsHorizontalScrollIndicator = YES;
+    self.scrollViewMain.showsVerticalScrollIndicator = YES;
+    self.scrollViewMain.delegate = self;
+    self.scrollViewMain.backgroundColor = [UIColor yellowColor];
+    self.scrollViewMain.bounces = NO;
+    [self.view addSubview:self.scrollViewMain];
+    
+    
+//    UITableView *tableViewPraise = [[UITableView alloc]init];
+//    tableViewPraise.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.scrollViewMain.height);
+//    tableViewPraise.backgroundColor = [UIColor redColor];
+//    [self.scrollViewMain addSubview:tableViewPraise];
+//    self.tableViewPraise = tableViewPraise;
+//    
+//    UITableView *tableViewMedium = [[UITableView alloc]init];
+//    tableViewMedium.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollViewMain.height);
+//    tableViewMedium.backgroundColor = [UIColor blueColor];
+//    [self.scrollViewMain addSubview:tableViewMedium];
+//    self.tableViewMedium = tableViewMedium;
+//    
+//    UITableView *tableViewBad = [[UITableView alloc]init];
+//    tableViewBad.frame = CGRectMake(2 * SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollViewMain.height);
+//    tableViewBad.backgroundColor = [UIColor purpleColor];
+//    [self.scrollViewMain addSubview:tableViewBad];
+//    self.tableViewBad = tableViewBad;
+    
+    for (int i = 0; i < 3; i++) {
+        UITableView *tableView = [[UITableView alloc]init];
+        tableView.frame = CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, self.scrollViewMain.height - 110);
+        [self.scrollViewMain addSubview:tableView];
+        self.tableView = tableView;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+
+        
+    }
+    
+    
+    
+
+    
+    
+}
+
+
+
+- (UIButton *)addBtnWithTitle:(NSString *)title frame:(CGRect)frame action:(SEL)action
+{
+    UIButton *btn = [[UIButton alloc]init];
+    [btn setFrame:frame];
+    btn.backgroundColor = [UIColor whiteColor];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    return btn;
+    
+}
+
+- (void)btnPraiseClick
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.scrollViewMain.contentOffset = CGPointMake(0, 0);
+        [self.btnPraise setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        [self.btnMedium setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+        [self.btnBad    setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+    }];
+}
+
+- (void)btnMediumClick
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.scrollViewMain.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+        [self.btnPraise setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+        [self.btnMedium setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        [self.btnBad    setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+
+    }];
+}
+
+- (void)btnBadClick
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.scrollViewMain.contentOffset = CGPointMake(SCREEN_WIDTH * 2, 0);
+        [self.btnPraise setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+        [self.btnMedium setTitleColor:[UIColor grayColor]   forState:UIControlStateNormal];
+        [self.btnBad    setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        
+    }];
+
+}
+
+#pragma mark - scrollView delegate
+/**
+ * 监听scrollview偏移量，使lineView相对滑动
+ */
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        CGFloat x = self.scrollViewMain.contentOffset.x;
+        int page = x / SCREEN_WIDTH;
+        if (page == 0){
+            [self btnPraiseClick];
+        }else if (page == 1)
+        {
+            [self btnMediumClick];
+        }else if (page == 2)
+        {
+            [self btnBadClick];
+        }
+    }];
+
+}
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    FeedbackCell *cell = [[FeedbackCell alloc]init];
+    self.cell = cell;
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //FeedbackCell *cell = [[FeedbackCell alloc]init];
+    
+    return self.cell.height;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+    
+}
+
+@end

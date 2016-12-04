@@ -1,0 +1,13 @@
+//
+//  BoutiqueShopViewController.h
+//  huile
+//
+//  Created by mac on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface BoutiqueShopViewController : UITableViewController
+
+@end

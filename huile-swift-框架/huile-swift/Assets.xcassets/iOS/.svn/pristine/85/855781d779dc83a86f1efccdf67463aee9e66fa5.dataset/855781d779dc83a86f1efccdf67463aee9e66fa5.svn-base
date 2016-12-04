@@ -1,0 +1,16 @@
+//
+//  ShareMoneyController.h
+//  huile
+//
+//  Created by LZJ on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ShareMoneyController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic,strong) UILabel * label1;
+@property(nonatomic,strong) UILabel * label2;
+@property(nonatomic,strong)UITableView *tableView;
+
+@end

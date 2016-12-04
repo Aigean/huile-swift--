@@ -1,0 +1,20 @@
+//
+//  CommonCell.h
+//  SuperSecretary
+//
+//  Created by mac on 15/11/22.
+//  Copyright (c) 2015年 谢腾飞. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@class CommonItem;
+@interface CommonCell : UITableViewCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+- (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(int)rows;
+
+/** cell对应的item数据 */
+@property (nonatomic, strong) CommonItem *item;
+
+@end

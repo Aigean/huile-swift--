@@ -1,0 +1,88 @@
+//
+//  CashController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CashController.h"
+#import "CashoneController.h"
+#import "CashRecordController.h"
+
+@interface CashController ()
+
+@end
+
+@implementation CashController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initsubview];
+    self.title = @"提现";
+}
+#pragma mark  methods
+-(void)initsubview{
+    UIButton * Btn = [UIButton butonWithFrame:CGRectMake(0, 0, 60, 35) buttonType:UIButtonTypeCustom imageNamed:nil text:@"提现记录" textFont:14 textColor:[UIColor colorWithHex:@"999999" andAlpha:1]];
+    [Btn addTarget:self action:@selector(pushjilu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    UILabel * lable =[UILabel labelWithFrame:CGRectMake(0, 10*Hight, 120*Width, 44*Hight) text:@"  可提现金额" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable.backgroundColor = [UIColor whiteColor];
+    
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(lable.right, 10*Hight, SCREENWIDTH-90*Width, 44*Hight)];
+    _field.backgroundColor = [UIColor whiteColor];
+    _field.borderStyle = UITextBorderStyleNone;
+    _field.placeholder = @"300";
+    _field.font =[UIFont systemFontOfSize:11];
+    UILabel * lable1 =[UILabel labelWithFrame:CGRectMake(0, 1*Hight+lable.bottom, 120*Width, 44*Hight) text:@"  金额（元）：" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable1.backgroundColor = [UIColor whiteColor];
+    
+    _field1 = [[UITextField alloc] initWithFrame:CGRectMake(lable1.right, 2*Hight+_field.bottom, SCREENWIDTH-50*Width, 44*Hight)];
+    _field1.backgroundColor = [UIColor whiteColor];
+    _field1.borderStyle = UITextBorderStyleNone;
+    _field1.placeholder = @"请输入提现金额";
+    _field1.font = [UIFont systemFontOfSize:11];
+    UILabel * lable2 = [UILabel labelWithFrame:CGRectMake(10*Width, lable1.bottom+10*Hight, SCREENHEIGHT, 20) text:@"  提现金额会直接到您最近用户支付或充值的账户" font:10 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, _field1.bottom +60, SCREENWIDTH-20, 45) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定提现" textFont:17 textColor:[UIColor whiteColor]];
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.layer.cornerRadius = 8.0;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:lable1];
+    [self.view addSubview:_field];
+    [self.view addSubview:lable2];
+    [self.view addSubview:lable];
+    [self.view addSubview:_field1];
+    [self.view addSubview:button];
+}
+
+#pragma mark action
+-(void)push{
+    CashoneController * vc = [[CashoneController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)pushjilu{
+    CashRecordController * vc = [[CashRecordController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

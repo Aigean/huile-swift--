@@ -1,0 +1,16 @@
+//
+//  HomeScrollView.h
+//  SuperSecretary
+//
+//  Created by mac on 15/11/23.
+//  Copyright (c) 2015年 谢腾飞. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface HomeScrollView : UIScrollView<UIScrollViewDelegate>
+
+@property (strong, nonatomic) UIImageView *imageView;
+- (instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image;
+
+@end

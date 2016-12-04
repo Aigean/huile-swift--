@@ -1,0 +1,14 @@
+//
+//  RechargeController.h
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface RechargeController : UIViewController
+@property(nonatomic,strong)UITextField * field;
+
+@end

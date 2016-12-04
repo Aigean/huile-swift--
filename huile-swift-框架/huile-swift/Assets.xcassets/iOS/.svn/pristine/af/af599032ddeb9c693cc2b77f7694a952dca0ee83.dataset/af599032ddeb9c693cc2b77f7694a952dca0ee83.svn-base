@@ -1,0 +1,16 @@
+//
+//  CardView.h
+//  huile
+//
+//  Created by LZJ on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CardView : UIView
+@property(nonatomic,strong)UIImageView *imgs;
+@property(nonatomic,strong)UILabel * lable1;
+@property(nonatomic,strong)UILabel * lable2;
+@property(nonatomic,strong)UILabel * lable3;
+@end

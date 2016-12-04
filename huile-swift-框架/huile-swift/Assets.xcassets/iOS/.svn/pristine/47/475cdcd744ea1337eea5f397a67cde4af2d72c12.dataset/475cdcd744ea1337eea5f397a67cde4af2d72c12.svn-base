@@ -1,0 +1,35 @@
+//
+//  sureview.m
+//  huile
+//
+//  Created by LZJ on 16/3/28.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "sureview.h"
+
+@implementation sureview
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        
+        [self initsubview];
+    }
+    return self;
+}
+#pragma mark --加载视图
+-(void)initsubview{
+    
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(SCREENWIDTH/4, SCREENHEIGHT/3, SCREENWIDTH/2, 3.0*SCREENWIDTH/8.0)];
+    view.backgroundColor = [UIColor colorWithHex:@"ffffff" andAlpha:1];
+    UIImageView * images = [[UIImageView alloc] initWithFrame:CGRectMake(view.width/3,20 , view.width/3, view.height/3)];
+    images.image = [UIImage imageNamed:@"dui"];
+    UILabel * lable = [UILabel labelWithFrame:CGRectMake(0, images.bottom+10, view.width, images.height) text:@"支付成功" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    [view addSubview:images];
+    [view addSubview:lable];
+    [self addSubview:view];
+}
+
+@end

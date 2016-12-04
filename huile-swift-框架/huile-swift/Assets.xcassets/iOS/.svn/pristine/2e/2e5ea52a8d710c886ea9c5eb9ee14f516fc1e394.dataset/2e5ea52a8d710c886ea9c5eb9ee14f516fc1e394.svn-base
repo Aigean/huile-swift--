@@ -1,0 +1,43 @@
+//
+//  CardrecordCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CardrecordCell.h"
+
+@implementation CardrecordCell
+
++(instancetype)cellWithTableView:(UITableView *)tableView{
+    static NSString * cellID= @"cell";
+    CardrecordCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell ==nil) {
+        cell = [[CardrecordCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+        return cell;
+}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initViews];
+    }
+    return self;
+}
+
+- (void)initViews{
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 50*Hight)];
+    view1.backgroundColor = [UIColor colorWithHex:@"ffffff" andAlpha:1];
+    _label = [UILabel labelWithFrame:CGRectMake(0, 0, 50*Width, 50*Hight) text:@"  -100" font:14 textColor:[UIColor colorWithHex:@"fc0000" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    _label1 = [UILabel labelWithFrame:CGRectMake(SCREENWIDTH-110*Hight, 5, 100*Width, 20*Hight) text:@"2016-03-21" font:11 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentRight];
+    UILabel * lable2 = [UILabel labelWithFrame:CGRectMake(_label1.right-100*Width, _label1.bottom+5*Hight, 100*Width, 20*Hight) text:@"提现" font:11 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentRight];
+    [view1 addSubview:_label];
+    [view1 addSubview:_label1];
+    [view1 addSubview:lable2];
+    [self addSubview:view1];
+
+}
+@end

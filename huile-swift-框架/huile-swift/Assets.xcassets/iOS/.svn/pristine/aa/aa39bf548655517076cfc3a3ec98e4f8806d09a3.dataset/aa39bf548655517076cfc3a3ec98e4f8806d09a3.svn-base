@@ -1,0 +1,77 @@
+//
+//  MineSmallCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "MineSmallCell.h"
+#import "MineModel.h"
+
+@implementation MineSmallCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+//{
+//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+//    if (self) {
+//        
+//        [self initSubviews];
+//        
+//        self.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    return self;
+//}
+//-(void)initSubviews{
+//    _image.frame =CGRectMake(10, 10, 20, 20);
+//    _image.image = [UIImage imageNamed:@""];
+//    _lable.frame =CGRectMake(60, 20, 100, 20);
+//    _lable.text  =@"你好";
+//    _lable.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+//    _lable.textAlignment = NSTextAlignmentLeft;
+//    [self.contentView addSubview:_lable];
+//    [self.contentView addSubview:_image];
+//    
+//    
+//}
++(instancetype)cellWithTableView:(UITableView *)tableView {
+    static NSString *jfMineBigTitleCell = @"mineCell";
+    MineSmallCell *cell = [tableView dequeueReusableCellWithIdentifier:jfMineBigTitleCell];
+    if (cell == nil) {
+        cell = [[MineSmallCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:jfMineBigTitleCell];
+    }
+    cell.imageView.image = [UIImage imageNamed:@"fenxiang@2x"];
+    cell.textLabel.text = @"你好";
+    //    cell.backgroundColor =[UIColor redColor];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+    
+}
++(instancetype)cellWithTableView:(UITableView *)tableView mineModel:(MineModel*)mineModel{
+    static NSString *jfmineCell = @"jfmineCell";
+    MineSmallCell *cell = [tableView dequeueReusableCellWithIdentifier:jfmineCell];
+    if (cell == nil) {
+        cell = [[MineSmallCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:jfmineCell];
+    }
+    NSString *imageStr = [NSString stringWithFormat:@"%@", mineModel.imageName];
+    cell.imageView.image = [UIImage imageNamed:imageStr];
+    cell.textLabel.text = mineModel.title;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+    
+}
+
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

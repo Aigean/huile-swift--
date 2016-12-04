@@ -1,0 +1,156 @@
+//
+//  DetailFeedback.m
+//  huile
+//
+//  Created by  周毅 on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "DetailFeedback.h"
+@interface DetailFeedback ()
+@property (nonatomic, weak) UILabel *buyerFeedback;
+@property (nonatomic, weak) UILabel *buyerFeedback2;
+@property (nonatomic, weak) UIImageView *imageStar;
+@property (nonatomic, weak) UIImageView *imageStar2;
+
+/**评价内容*/
+@property (nonatomic, weak) UILabel *feedbackContent;
+@property (nonatomic, weak) UILabel *feedbackContent2;
+@property (nonatomic, weak) UILabel *LabelFindMore;
+
+/**分割线*/
+@property (nonatomic, weak) UIView *viewLine;
+@property (nonatomic, weak) UIView *viewLine2;
+@property (nonatomic, weak) UIView *viewLine3;
+@property (nonatomic, weak) UIView *viewLine4;
+
+
+@end
+
+@implementation DetailFeedback
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 420.0/750*SCREEN_WIDTH)];
+        view.backgroundColor = [UIColor whiteColor];
+        [self addSubview:view];
+        // 星星
+        UIImageView *imageStar = [[UIImageView alloc]init];
+        [view addSubview:imageStar];
+        self.imageStar = imageStar;
+        imageStar.image = [UIImage imageNamed:@"star.png"];
+        imageStar.backgroundColor = [UIColor yellowColor];
+        
+        // 星星2
+        UIImageView *imageStar2 = [[UIImageView alloc]init];
+        [view addSubview:imageStar2];
+        self.imageStar2 = imageStar2;
+        imageStar2.image = [UIImage imageNamed:@"star.png"];
+        imageStar2.backgroundColor = [UIColor yellowColor];
+
+        
+        // 买家评价
+        UILabel *buyerFeedback = [[UILabel alloc]init];
+        
+        [view addSubview:buyerFeedback];
+        self.buyerFeedback = buyerFeedback;
+        buyerFeedback.text = @"买家评价";
+        buyerFeedback.font = [UIFont systemFontOfSize:15];
+        // 分割线
+        UIView *viewLine = [[UIView alloc]init];
+        self.viewLine = viewLine;
+        self.viewLine.backgroundColor = kRGB(242, 242, 242, 1.0f);
+        [view addSubview:viewLine];
+        
+        // 分割线2
+        UIView *viewLine2 = [[UIView alloc]init];
+        self.viewLine2 = viewLine2;
+        self.viewLine2.backgroundColor = kRGB(242, 242, 242, 1.0f);
+        [view addSubview:viewLine2];
+        // 分割线3
+        UIView *viewLine3 = [[UIView alloc]init];
+        self.viewLine3 = viewLine3;
+        self.viewLine3.backgroundColor = kRGB(242, 242, 242, 1.0f);
+        [view addSubview:viewLine3];
+        // 分割线4
+        UIView *viewLine4 = [[UIView alloc]init];
+        self.viewLine4 = viewLine4;
+        self.viewLine4.backgroundColor = kRGB(242, 242, 242, 1.0f);
+        [view addSubview:viewLine4];
+        
+        
+        // 买家评价2
+        UILabel *buyerFeedback2= [[UILabel alloc]init];
+        
+        [view addSubview:buyerFeedback2];
+        self.buyerFeedback2 = buyerFeedback2;
+        buyerFeedback2.text = @"买家评价";
+        buyerFeedback2.font = [UIFont systemFontOfSize:15];
+        
+        // 评价内容
+        UILabel *feedbackContent = [[UILabel alloc]init];
+        [view addSubview:feedbackContent];
+        feedbackContent.text = @"买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容";
+        feedbackContent.font = [UIFont systemFontOfSize:12];
+        feedbackContent.numberOfLines = 0;
+        self.feedbackContent  = feedbackContent;
+        
+        // 评价内容2
+        UILabel *feedbackContent2 = [[UILabel alloc]init];
+        [view addSubview:feedbackContent2];
+        feedbackContent2.text = @"买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容买家评价内容";
+        feedbackContent2.font = [UIFont systemFontOfSize:12];
+        feedbackContent2.numberOfLines = 0;
+        self.feedbackContent2  = feedbackContent2;
+
+        //查看全部评论Label
+        UILabel *LabelFindMore = [[UILabel alloc]init];
+        LabelFindMore.text = @"查看全部评论";
+        self.LabelFindMore = LabelFindMore;
+        LabelFindMore.textColor = [UIColor lightGrayColor];
+        [view addSubview:LabelFindMore];
+        
+        // 查看全部评论箭头
+        UIButton *btnMore = [[UIButton alloc]init];
+        self.btnMore = btnMore;
+        UIImageView *imgView = [[UIImageView alloc]initWithFrame:KCGRECT(110, 20, 20, 30)];
+        imgView.image = [UIImage imageNamed:@"right arrow"];
+        
+        [btnMore addSubview:imgView];
+        
+        [view addSubview:btnMore];
+        
+        
+        
+        
+        
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    self.buyerFeedback.frame = KCGRECT(20, 20, 150, 30);
+    self.buyerFeedback2.frame = KCGRECT(20, 195, 150, 20);
+    
+    self.imageStar.frame = KCGRECT(190, 20, 120, 30);
+    self.imageStar2.frame = KCGRECT(190, 195, 120, 30);
+    
+    self.viewLine.frame = KCGRECT(20, 71, 710, 4);
+    self.viewLine2.frame = KCGRECT(20, 246, 710, 4);
+    self.viewLine3.frame = KCGRECT(0, 173, 750, 4);
+    self.viewLine4.frame = KCGRECT(0, 348, 750,4);
+    
+    self.LabelFindMore.frame = KCGRECT(20, 370, 400, 30);
+    
+    
+    self.feedbackContent.frame = KCGRECT(20, 90, 710, 90);
+    self.feedbackContent2.frame = KCGRECT(20, 265, 710, 90);
+    
+    self.btnMore.frame = KCGRECT(600, 350,150, 70);
+    
+    
+}
+
+
+@end

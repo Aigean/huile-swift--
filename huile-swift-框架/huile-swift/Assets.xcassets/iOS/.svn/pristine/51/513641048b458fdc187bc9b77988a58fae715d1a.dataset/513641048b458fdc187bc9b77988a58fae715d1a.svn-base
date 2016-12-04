@@ -1,0 +1,87 @@
+
+
+
+
+//
+//  DetailShopName.m
+//  huile
+//
+//  Created by  周毅 on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "DetailShopName.h"
+
+@interface DetailShopName ()
+
+@property (nonatomic, weak) UILabel *labelName;
+@property (nonatomic, weak) UIImageView *imageStar;
+@property (nonatomic, weak) UILabel *labelRefund;
+@property (nonatomic, weak) UILabel *labelCount;
+@property (nonatomic, weak) UIButton *collect;
+
+
+@end
+@implementation DetailShopName
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 122.0/750*SCREEN_WIDTH)];
+        view.backgroundColor = [UIColor whiteColor];
+        // 星星
+        UIImageView *imageStar = [[UIImageView alloc]init];
+        [view addSubview:imageStar];
+        self.imageStar = imageStar;
+        imageStar.image = [UIImage imageNamed:@"star.png"];
+        //imageStar.backgroundColor = [UIColor yellowColor];
+      
+        // 收藏
+        UIButton *collect = [[UIButton alloc]init];
+        [view addSubview:collect];
+        [collect setBackgroundImage:[UIImage imageNamed:@"fankui"] forState:UIControlStateNormal];
+        self.collect = collect;
+        
+        // 店铺名称
+        UILabel *labelName = [[UILabel alloc]init];
+        [view addSubview:labelName];
+        self.labelName = labelName;
+        self.labelName.text = @"店铺名称";
+        self.labelName.font = [UIFont systemFontOfSize:12];
+        // 七天无理由退款
+        UILabel *labelRefund = [[UILabel alloc]init];
+        [view addSubview:labelRefund];
+        self.labelRefund = labelRefund;
+        labelRefund.text = @"七天无理由退款";
+        labelRefund.font = [UIFont systemFontOfSize:10];
+        labelRefund.textColor = [UIColor orangeColor];
+        
+        // 折扣
+        UILabel *labelCount = [[UILabel alloc]init];
+        [view addSubview:labelCount];
+        self.labelCount = labelCount;
+        labelCount.text = @"8.8折";
+        labelCount.textColor = [UIColor redColor];
+        
+
+        
+        [self addSubview:view];
+        
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    self.collect.frame = CGRectMake(670.0/750*SCREEN_WIDTH, 32.0/750*SCREEN_WIDTH, 30.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+   
+    self.labelName.frame = CGRectMake(20.0/750*SCREEN_WIDTH, 32.0/750*SCREEN_WIDTH, 180.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.imageStar.frame = CGRectMake(20.0/750*SCREEN_WIDTH, 76.0/750*SCREEN_WIDTH, 120.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelRefund.frame = CGRectMake(220.0/750*SCREEN_WIDTH, 76.0/750*SCREEN_WIDTH, 180.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelCount.frame = CGRectMake(650.0/750*SCREEN_WIDTH, 74.0/750*SCREEN_WIDTH, 100.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+}
+
+@end

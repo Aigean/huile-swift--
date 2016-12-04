@@ -1,0 +1,58 @@
+//
+//  CooperateView.m
+//  huile
+//
+//  Created by LZJ on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CooperateView.h"
+
+@implementation CooperateView
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self initSubView];
+    }
+    return self;
+}
+-(void)initSubView{
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(10*Width, 10*Hight, SCREENWIDTH-20*Width, 45*Hight)];
+    _field.borderStyle = UITextBorderStyleRoundedRect;
+    _field.placeholder =@"您的姓名";
+    _field.delegate = self;
+   _field1 = [[UITextField alloc] initWithFrame:CGRectMake(10*Width, _field.bottom +10*Hight, SCREENWIDTH-20*Width, 45*Hight)];
+    _field1.borderStyle = UITextBorderStyleRoundedRect;
+    _field1.placeholder =@"联系电话";
+    _field1.delegate = self;
+    _field2 = [[UITextField alloc] initWithFrame:CGRectMake(10*Width, 10*Hight+_field1.bottom, SCREENWIDTH-20*Width, 45*Hight)];
+    _field2.borderStyle = UITextBorderStyleRoundedRect;
+    _field2.placeholder =@"您所在地城市";
+    _field2.delegate = self;
+
+    
+    _btn = [UIButton butonWithFrame:CGRectMake(10*Width, 10*Hight+_field2.bottom, SCREENWIDTH-20*Width, 45*Hight) buttonType:UIButtonTypeCustom imageNamed:nil text:@"提交申请" textFont:17 textColor:[UIColor whiteColor]];
+    _btn.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    _btn.titleLabel.textAlignment =NSTextAlignmentCenter;
+    _btn.layer.masksToBounds = YES;
+    _btn.layer.cornerRadius = 8.0;
+        [self addSubview:_field];
+    [self addSubview:_field1];
+    [self addSubview:_field2];
+    [self addSubview:_btn];
+ }
+#pragma mark --- delegata
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];    //主要是[receiver resignFirstResponder]在哪调用就能把receiver对应的键盘往下收
+    return YES;
+}
+
+@end

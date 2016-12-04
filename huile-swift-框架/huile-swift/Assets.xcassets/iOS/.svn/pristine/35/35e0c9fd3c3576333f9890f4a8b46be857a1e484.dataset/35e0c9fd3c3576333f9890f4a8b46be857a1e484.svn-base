@@ -1,0 +1,74 @@
+//
+//  CollectViewController.m
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CollectViewController.h"
+#import "CollectTableViewCell.h"
+#import "MerchantDetailViewController.h"
+
+@interface CollectViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@end
+
+@implementation CollectViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   // self.title = @"收藏店铺";
+    self.view.backgroundColor = TFColor(239, 239, 239, 1.0);
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 10,MainScreen_Width, MainScreen_Height-64)];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.rowHeight = 100;
+    [self.view addSubview:_tableView];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CollectTableViewCell *cell = [CollectTableViewCell cellWithTableView:tableView];
+    cell.activityLabel.hidden = YES;
+    return cell;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MerchantDetailViewController *detail = [[MerchantDetailViewController alloc]init];
+    detail.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

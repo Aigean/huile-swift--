@@ -1,0 +1,58 @@
+//
+//  ChooseCardCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/23.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "ChooseCardCell.h"
+@interface ChooseCardCell()
+//@property(nonatomic ,strong)UIButton *btn;
+
+@end
+
+@implementation ChooseCardCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+ 
+    // Configure the view for the selected state
+}
++(instancetype)cellWithTableView:(UITableView *)tableView{
+    static NSString *MineBigTitleCell = @"mineCell";
+    ChooseCardCell *cell = [tableView dequeueReusableCellWithIdentifier:MineBigTitleCell];
+    if (cell == nil) {
+        cell = [[ChooseCardCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MineBigTitleCell];
+    }
+    
+    cell.textLabel.text = @"xx银行卡 尾号9999";
+    cell.textLabel.textColor =[UIColor colorWithHex:@"333333" andAlpha:1];
+    cell.detailTextLabel.text = @"可用此银行卡进行支付";
+    cell.detailTextLabel.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+//    _btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREENWIDTH-30*Width, 20*Hight, 20*Width, 20*Hight)];
+//    _btn.backgroundColor = [UIColor clearColor];
+////    _btn = [UIButton butonWithFrame:CGRectMake(SCREENWIDTH-30*Width, 20*Hight, 20*Width, 20*Hight) buttonType:UIButtonTypeCustom imageNamed:@"" text:nil textFont:0 textColor:nil];
+////    _btn.backgroundColor =
+//   [_btn setImage:[UIImage imageNamed:@"fankui"] forState:UIControlStateNormal];
+//   [_btn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
+////  [_btn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateNormal];
+//    
+//   [cell.contentView addSubview:_btn];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    return cell;
+    
+}
+#pragma mark action
+-(void)ppp:(id)sender{
+    
+    UIButton *button = _btn;
+    button.selected = !button.selected;
+    
+}
+@end

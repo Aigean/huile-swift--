@@ -1,0 +1,178 @@
+//
+//  merchantViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "merchantViewController.h"
+#import "CollectTableViewCell.h"
+#import "MerchantDetailViewController.h"
+
+@interface merchantViewController ()
+
+@end
+
+@implementation merchantViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    self.navigationController.navigationBarHidden = NO;
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupNav];
+    [self loadSubView];
+    [self loadTableView];
+    //self.view.backgroundColor = TFColor(239, 239, 239, 1.0);
+}
+
+//导航部分
+- (void)setupNav
+{
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    leftBtn.frame = CGRectMake(0, 0, 40, 35);
+    [leftBtn setImage:[UIImage imageNamed:@"Down arrow"] forState:UIControlStateNormal];
+    //先设置按钮里面的内容居中
+    leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    //设置文字居左 －>向左移35
+    [leftBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+    //设置文字居左 －>向右移30
+    leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+    [leftBtn setTitle:@"武汉" forState:UIControlStateNormal];
+    leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    //[leftBtn addTarget:self action:@selector(btn_leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    
+    
+    UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    scanBtn.frame = CGRectMake(0, 0, 50, 35);
+    [scanBtn setImage:[UIImage imageNamed:@"scan"] forState:UIControlStateNormal];
+    //[MapBtn addTarget:self action:@selector(mapBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:scanBtn];
+    
+    
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    searchBar.backgroundImage = [UIImage imageNamed:@""];
+    searchBar.placeholder = @"搜索";
+    self.navigationItem.titleView = searchBar;
+    
+}
+
+- (void)loadSubView
+{
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MainScreen_Width/2, 44)];
+    [leftButton setTitle:@"美食" forState:UIControlStateNormal];
+    leftButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [leftButton setTitleColor:[UIColor blackColor] forState:0];
+    [leftButton addTarget:self action:@selector(leftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:leftButton];
+    
+    
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(MainScreen_Width/2, 0, MainScreen_Width/2, 44)];
+    [rightButton setTitle:@"筛选" forState:UIControlStateNormal];
+    rightButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [rightButton setTitleColor:[UIColor blackColor] forState:0];
+    [rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rightButton];
+    
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 43, MainScreen_Width, 1)];
+    line.backgroundColor = TFColor(239, 239, 239, 1.0);
+    [self.view addSubview:line];
+    
+    UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(MainScreen_Width/2-0.5, 0, 1, 44)];
+    line1.backgroundColor = TFColor(239, 239, 239, 1.0);
+    [self.view addSubview:line1];
+}
+
+-(void)leftButtonClick:(UIButton *)sender
+{
+    NSArray * arr = [[NSArray alloc] init];
+    arr = [NSArray arrayWithObjects:@"美食", @"电影", @"周边", @"丽人", @"KTV", @"外卖", @"酒店", @"优惠买单", nil];
+    _dropDown.tag = 100;
+    if(_dropDown == nil) {
+        CGFloat f = 200;
+        
+       _dropDown = [[NIDropDown alloc]initWithFrame:CGRectMake(0, 0, 100, 100) :&f :arr :sender] ;
+        _dropDown.delegate = self;
+        
+    }else {
+        [_dropDown hideDropDown:sender];
+        [self close];
+    }
+}
+
+-(void)rightButtonClick:(UIButton *)sender
+{
+    NSArray * arr = [[NSArray alloc] init];
+    arr = [NSArray arrayWithObjects:@"好评", @"距离", @"销量", nil];
+    _dropDown.tag = 101;
+    if(_dropDown == nil) {
+        CGFloat f = 120;
+        
+       _dropDown = [[NIDropDown alloc]initWithFrame:CGRectMake(0, 0, 100, 80) :&f :arr :sender] ;
+       _dropDown.delegate = self;
+        
+    }
+    else {
+        [_dropDown hideDropDown:sender];
+        [self close];
+    }
+}
+
+- (void) niDropDownDelegateMethod: (NIDropDown *) sender {
+    
+    [self close];
+    
+}
+
+-(void)close{
+     _dropDown = nil;
+}
+
+
+- (void)loadTableView
+{
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, MainScreen_Width, MainScreen_Height-109)];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.rowHeight = 100;
+    _tableView.keyboardDismissMode =  UIScrollViewKeyboardDismissModeOnDrag;
+    [self.view addSubview:_tableView];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 9;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CollectTableViewCell *cell = [CollectTableViewCell cellWithTableView:tableView];
+    cell.activityLabel.hidden = YES;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MerchantDetailViewController *vc =[[MerchantDetailViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+@end

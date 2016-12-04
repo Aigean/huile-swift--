@@ -1,0 +1,15 @@
+//
+//  DetailPicture.h
+//  huile
+//
+//  Created by  周毅 on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface DetailPicture : UIView
+@property (nonatomic, weak) UIButton *navLeftBtn;
+
+
+@end

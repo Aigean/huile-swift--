@@ -1,0 +1,22 @@
+//
+//  SecondViewCell.h
+//  huile
+//
+//  Created by mac on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "TopNewsView.h"
+@interface SecondViewCell : UITableViewCell
+
+
+{
+    NSMutableArray * _homePageNewsData;
+    NSUInteger currentPage;
+}
+@property (nonatomic, strong) NSMutableArray * array;
+@property (nonatomic, strong) TopNewsView * topNewsView;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+@end

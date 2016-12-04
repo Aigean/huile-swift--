@@ -1,0 +1,18 @@
+//
+//  MineSmallCell.h
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class MineModel;
+
+@interface MineSmallCell : UITableViewCell
+@property(nonatomic,strong)UIImageView *image;
+@property(nonatomic,strong)UILabel *lable;
++(instancetype)cellWithTableView:(UITableView *)tableView;
++(instancetype)cellWithTableView:(UITableView *)tableView mineModel:(MineModel*)mineModel;
+
+@end

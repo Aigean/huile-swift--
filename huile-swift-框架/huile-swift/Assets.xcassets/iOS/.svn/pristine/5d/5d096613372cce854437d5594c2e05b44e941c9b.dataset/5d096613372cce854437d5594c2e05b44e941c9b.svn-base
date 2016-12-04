@@ -1,0 +1,13 @@
+//
+//  TabbarViewController.h
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface TabbarViewController : UITabBarController
+
+@end

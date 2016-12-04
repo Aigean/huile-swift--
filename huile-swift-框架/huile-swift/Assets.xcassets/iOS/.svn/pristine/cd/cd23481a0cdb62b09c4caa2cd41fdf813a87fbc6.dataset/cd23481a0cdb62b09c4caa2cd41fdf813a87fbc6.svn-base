@@ -1,0 +1,14 @@
+//
+//  ShareCell.h
+//  huile
+//
+//  Created by LZJ on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ShareCell : UITableViewCell
+@property(nonatomic,strong)UILabel * label;
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+@end

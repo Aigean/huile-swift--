@@ -1,0 +1,15 @@
+//
+//  AboutWeViewController.h
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AboutWeViewController : UIViewController
+@property(nonatomic,strong)UIImageView * imageview;
+@property(nonatomic,strong)UILabel * lable;
+
+@end

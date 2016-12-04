@@ -1,0 +1,36 @@
+//
+//  BoutiqueViewCell.m
+//  huile
+//
+//  Created by mac on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "BoutiqueViewCell.h"
+
+@implementation BoutiqueViewCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"BoutiqueViewCell";
+    BoutiqueViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[BoutiqueViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return cell;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, MainScreen_Width, MainScreen_Height/5)];
+        _imgView.image = [UIImage imageNamed:@"3.jpg"];
+        [self addSubview:_imgView];
+    }
+    return self;
+}
+
+
+@end

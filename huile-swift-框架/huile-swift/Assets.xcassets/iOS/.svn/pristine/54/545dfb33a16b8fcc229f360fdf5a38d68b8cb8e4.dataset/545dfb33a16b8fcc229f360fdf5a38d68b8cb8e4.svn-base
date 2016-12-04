@@ -1,0 +1,22 @@
+//
+//  UILabel+LzjLable.m
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 whluojiachuanyi. All rights reserved.
+//
+
+#import "UILabel+LzjLable.h"
+
+@implementation UILabel (LzjLable)
++(UILabel *)labelWithFrame:(CGRect)labelFrame text:(NSString *)text font:(CGFloat)font textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)labelAlignment {
+    
+    UILabel *Label = [[UILabel alloc]initWithFrame:labelFrame];
+    Label.text = text;
+    Label.font = [UIFont systemFontOfSize:font];
+    Label.textColor = textColor;
+    Label.textAlignment = labelAlignment;
+    return Label;
+}
+
+@end

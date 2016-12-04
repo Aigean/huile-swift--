@@ -1,0 +1,87 @@
+//
+//  PaymentView.m
+//  huile
+//
+//  Created by LZJ on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "PaymentView.h"
+#import "PasswordInput.h"
+@interface PaymentView ()
+@property (nonatomic, strong) PasswordInput  * inputpwdView;
+
+@property (nonatomic, strong) UIButton      * sureButton;
+
+@end
+@implementation PaymentView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+//        [self drawView];
+        
+        [self setNeedsLayout];
+    }
+    return self;
+}
+#pragma mark --- 加载视图
+/**
+*  绘制默认视图
+*/
+- (void)drawView {
+    //头部子视图
+    UILabel * lable = [UILabel labelWithFrame:CGRectMake(0, 10, SCREENWIDTH, 20) text:@"支付费用" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    UILabel * lable1 = [UILabel labelWithFrame:CGRectMake(0, 10+lable.bottom, SCREENWIDTH, 20) text:@"540" font:14 textColor:[UIColor colorWithHex:@"fc5400" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    UILabel * lable2 = [UILabel labelWithFrame:CGRectMake(0, 10+lable1.bottom, SCREENWIDTH/2, 20) text:@"请输入支付密码" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentRight];
+     //密码区域
+    self.inputpwdView = [[PasswordInput alloc]initWithFrame:CGRectMake(20, lable2.bottom+10, SCREENWIDTH-20, 45)];
+    self.inputpwdView.tag = 121;
+    self.inputpwdView.backgroundColor = [UIColor whiteColor];
+    self.inputpwdView.layer.borderWidth = 1.f;
+    self.inputpwdView.layer.borderColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1.].CGColor;
+    UIButton * btn = [UIButton butonWithFrame:CGRectMake(0, self.inputpwdView.bottom+5, SCREENWIDTH, 30) buttonType:UIButtonTypeCustom imageNamed:nil text:@"确认支付" textFont:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1]];
+    [self addSubview:btn];
+    [self addSubview:self.inputpwdView];
+    [self addSubview:lable2];
+    [self addSubview:lable1];
+    [self addSubview:lable];
+    
+
+}
+//显示
+- (void)show {
+    
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self];
+//    //实现放大的弹簧效果
+//    self.transform = CGAffineTransformMakeScale(1.21f, 1.21f);
+//    self.alpha = 0;
+    
+    [UIView animateWithDuration:.7f delay:0.f usingSpringWithDamping:.7f initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        if (self.alertType == PayAlertTypeAlert) {
+//            [self.inputpwdView.pwdTextField becomeFirstResponder];
+//        }
+        self.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.alpha = 1.0;
+    } completion:nil];
+}
+
+
+//点击确认按钮，切换视图
+- (void)transformPaymentViews {
+    self.sureButton.selected = YES;
+    self.hidden = NO;
+    
+    
+    [self transformDirection:YES withCurrentView:self withLastView:self];
+    
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:self.animateTime*.5];
+}
+
+- (void)delayMethod {
+    [self.inputpwdView.pwdTextField becomeFirstResponder];
+}
+
+
+@end

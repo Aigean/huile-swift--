@@ -1,0 +1,15 @@
+//
+//  UIButton+MyExtension.h
+//  weiyuan
+//
+//  Created by 秦仕海 on 15/7/23.
+//  Copyright (c) 2015年 Kiwaro. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIButton (MyExtension)
+
++ (UIButton *)myButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector frame:(CGRect)frame image:(UIImage *)image darkTextColor:(BOOL)darkTextColor;
+
+@end

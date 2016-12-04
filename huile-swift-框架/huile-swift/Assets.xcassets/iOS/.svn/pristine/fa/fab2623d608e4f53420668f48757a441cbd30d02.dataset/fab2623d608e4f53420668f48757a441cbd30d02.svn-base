@@ -1,0 +1,146 @@
+//
+//  Detail.m
+//  huile
+//
+//  Created by  周毅 on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "Detail.h"
+@interface Detail()
+@property (nonatomic, weak) UIImageView *imageViewIcon;
+@property (nonatomic, weak) UILabel *labelName;
+@property (nonatomic, weak) UIImageView *imageStar;
+@property (nonatomic, weak) UILabel *labelRefund;
+@property (nonatomic, weak) UILabel *labelCount;
+@property (nonatomic, weak) UIImageView *imageLocal;
+@property (nonatomic, weak) UILabel *labelLocal;
+@property (nonatomic, weak) UILabel *labelBuyNumber;
+@property (nonatomic, weak) UILabel *labelNewShop;
+
+@end
+
+@implementation Detail
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        // 图片
+        UIImageView *imageViewIcon = [[UIImageView alloc]init];
+        [self.contentView addSubview:imageViewIcon];
+        self.imageViewIcon = imageViewIcon;
+        self.imageViewIcon.image = [UIImage imageNamed:@"1.jpg"];
+        // 星星
+        UIImageView *imageStar = [[UIImageView alloc]init];
+        [self.contentView addSubview:imageStar];
+        self.imageStar = imageStar;
+        imageStar.image = [UIImage imageNamed:@"star.png"];
+        //imageStar.backgroundColor = [UIColor yellowColor];
+        // 定位图片
+        UIImageView *imageLocal = [[UIImageView alloc]init];
+        [self.contentView addSubview:imageLocal];
+        self.imageLocal = imageLocal;
+        imageLocal.image = [UIImage imageNamed:@"map"];
+        // 店铺名称
+        UILabel *labelName = [[UILabel alloc]init];
+        [self.contentView addSubview:labelName];
+        self.labelName = labelName;
+        self.labelName.text = @"店铺名称";
+        self.labelName.font = [UIFont systemFontOfSize:12];
+        // 七天无理由退款
+        UILabel *labelRefund = [[UILabel alloc]init];
+        [self.contentView addSubview:labelRefund];
+        self.labelRefund = labelRefund;
+        labelRefund.text = @"七天无理由退款";
+        labelRefund.font = [UIFont systemFontOfSize:10];
+        labelRefund.textColor = [UIColor orangeColor];
+        
+        // 定位距离
+        UILabel *labelLocal = [[UILabel alloc]init];
+        [self.contentView addSubview:labelLocal];
+        self.labelLocal = labelLocal;
+        labelLocal.text = @"200m";
+        labelLocal.font = [UIFont systemFontOfSize:12];
+        labelLocal.textColor = [UIColor lightGrayColor];
+        
+        // 折扣
+        UILabel *labelCount = [[UILabel alloc]init];
+        [self.contentView addSubview:labelCount];
+        self.labelCount = labelCount;
+        labelCount.text = @"8.8折";
+        labelCount.textColor = [UIColor redColor];
+        //labelCount.backgroundColor = [UIColor blueColor];
+        
+        
+        // 购买人数
+        UILabel *labelBuyNumber = [[UILabel alloc]init];
+        [self.contentView addSubview:labelBuyNumber];
+        self.labelBuyNumber = labelBuyNumber;
+        labelBuyNumber.text = @"已2000人支付";
+        labelBuyNumber.font = [UIFont systemFontOfSize:11];
+        labelBuyNumber.textColor = [UIColor lightGrayColor];
+        
+        // 新店开张
+        UILabel *labelNewShop = [[UILabel alloc]init];
+        [self.contentView addSubview:labelNewShop];
+        self.labelNewShop = labelNewShop;
+        labelNewShop.text = @"开业活动，限定一周";
+        labelNewShop.font = [UIFont systemFontOfSize:10];
+        labelNewShop.textColor = [UIColor lightGrayColor];
+
+        
+    }
+    
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.imageViewIcon.frame = CGRectMake(20.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH, 180.0/750*SCREEN_WIDTH, 160.0/750*SCREEN_WIDTH);
+    
+    self.labelName.frame = CGRectMake(220.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH, 180.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.imageStar.frame = CGRectMake(220.0/750*SCREEN_WIDTH, 64.0/750*SCREEN_WIDTH, 120.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelRefund.frame = CGRectMake(220.0/750*SCREEN_WIDTH, 104.0/750*SCREEN_WIDTH, 180.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelCount.frame = CGRectMake(220.0/750*SCREEN_WIDTH, 144.0/750*SCREEN_WIDTH, 100.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelLocal.frame = CGRectMake(630.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH, 100.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.imageLocal.frame = CGRectMake(600.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH, 20.0/750*SCREEN_WIDTH, 26.0/750*SCREEN_WIDTH);
+    
+    self.labelBuyNumber.frame = CGRectMake(560.0/750*SCREEN_WIDTH, 150.0/750*SCREEN_WIDTH, 190.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH);
+    
+    self.labelNewShop.frame = CGRectMake(320.0/750*SCREEN_WIDTH, 150.0/750*SCREEN_WIDTH, 250.0/750*SCREEN_WIDTH, 24.0/750*SCREEN_WIDTH);
+    
+}
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *cellID = @"cell";
+    Detail *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[Detail alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+//    cell.imageView.image = [UIImage imageNamed:@"1"];
+//    cell.textLabel.text = @"dd";
+    
+    
+    
+    return cell;
+}
+
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state
+}
+
+
+@end

@@ -1,0 +1,19 @@
+//
+//  NextRegistViewController.h
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface NextRegistViewController : UIViewController
+
+@property (nonatomic,strong)UITextField * numberField;
+@property (nonatomic,strong)UITextField * wordField;
+@property (nonatomic,strong)UIButton    * getWordButton;
+@property (nonatomic,strong)UIButton    * sureButton;
+@property (nonatomic,strong)NSMutableArray * areaArray;
+@property (nonatomic,copy ) NSString   * string;
+@end

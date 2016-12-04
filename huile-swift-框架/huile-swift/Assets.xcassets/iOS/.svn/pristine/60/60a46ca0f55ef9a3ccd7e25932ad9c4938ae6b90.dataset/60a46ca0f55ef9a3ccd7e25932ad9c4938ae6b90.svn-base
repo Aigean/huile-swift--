@@ -1,0 +1,60 @@
+
+
+//
+//  DetailFooter.m
+//  huile
+//
+//  Created by  周毅 on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "DetailFooter.h"
+
+@implementation DetailFooter
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UIView *view = [[UIView alloc]init];
+        view.frame = KCGRECT(0, 0, 750, 98);
+        [self addSubview:view];
+        
+        
+        UILabel *labelCount = [[UILabel alloc]init];
+        labelCount.frame = KCGRECT(0, 0, 350, 98);
+        labelCount.backgroundColor = [UIColor whiteColor];
+        labelCount.text = @"9折";
+        labelCount.textColor = [UIColor redColor];
+        labelCount.textAlignment = NSTextAlignmentCenter;
+        
+        [view addSubview:labelCount];
+        
+        UIButton *detailBtn = [[UIButton alloc]init];
+        detailBtn.frame = KCGRECT(350,0, 200, 98);
+        [detailBtn setTitle:@"查看详情" forState:UIControlStateNormal];
+        detailBtn.backgroundColor = [UIColor lightGrayColor];
+        [view addSubview:detailBtn];
+        detailBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        //[detailBtn addTarget:self action:@selector(seeDetails) forControlEvents:UIControlEventTouchUpInside];
+        self.btn = detailBtn;
+        
+        
+        UIButton *payBtn = [[UIButton alloc]init];
+        payBtn.frame = KCGRECT(550, 0, 200, 98);
+        [payBtn setTitle:@"支付" forState:UIControlStateNormal];
+        [payBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        payBtn.backgroundColor = [UIColor orangeColor];
+        payBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:payBtn];
+        
+        self.payButton = payBtn;
+        
+        
+        
+    }
+    return self;
+}
+
+
+@end

@@ -1,0 +1,31 @@
+
+
+
+//
+//  DetailSimilar.m
+//  huile
+//
+//  Created by  周毅 on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "DetailSimilar.h"
+
+@implementation DetailSimilar
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UIView *view = [[UIView alloc]initWithFrame:KCGRECT(0, 0, 750, 90)];
+        view.backgroundColor = [UIColor whiteColor];
+        [self addSubview:view];
+        UILabel *label = [[UILabel alloc]init];
+        label.text = @"类似店铺";
+        [view addSubview:label];
+        label.frame = KCGRECT(20, 25 , 400, 40);
+        
+    }
+    return self;
+}
+
+@end

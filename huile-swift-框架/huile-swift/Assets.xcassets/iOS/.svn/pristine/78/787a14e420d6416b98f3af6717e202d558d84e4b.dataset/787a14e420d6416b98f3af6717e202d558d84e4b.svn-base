@@ -1,0 +1,53 @@
+//
+//  CashoneController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CashoneController.h"
+
+
+@interface CashoneController ()
+
+@end
+
+@implementation CashoneController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title =@"提现";
+    [self initsubview];
+    
+}
+#pragma mark--加载子视图
+-(void)initsubview{
+    UIImageView * imgs = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH/2-40, 30*Hight, 80, 80)];
+    imgs.backgroundColor = [UIColor purpleColor];
+    imgs.layer.cornerRadius = 40;
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, imgs.bottom +60, SCREENWIDTH-20, 45) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:17 textColor:[UIColor whiteColor]];
+    button.layer.cornerRadius = 8.0;
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:imgs];
+    [self.view addSubview:button];
+    
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

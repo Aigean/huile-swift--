@@ -1,0 +1,14 @@
+//
+//  ChooseCell.h
+//  huile
+//
+//  Created by LZJ on 16/3/23.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ChooseCell : UITableViewCell
+@property(nonatomic ,strong)UIButton *btn;
++(instancetype)cellWithTableView:(UITableView *)tableView Image:(NSString *)image text:(NSString *)text;
+@end

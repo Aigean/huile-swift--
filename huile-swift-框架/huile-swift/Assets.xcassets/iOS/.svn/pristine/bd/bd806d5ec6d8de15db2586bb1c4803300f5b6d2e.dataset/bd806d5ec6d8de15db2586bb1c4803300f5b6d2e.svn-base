@@ -1,0 +1,38 @@
+//
+//  CardViewCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/28.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CardViewCell.h"
+#import "CardView.h"
+
+@implementation CardViewCell
+
++(instancetype)cellWithTableView:(UITableView *)tableView{
+    static NSString * cellID= @"cell";
+    CardViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell ==nil) {
+        cell = [[CardViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return cell;
+}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initViews];
+    }
+    return self;
+}
+
+- (void)initViews{
+    
+    _view1 = [[CardView alloc] initWithFrame:CGRectMake(10*Width, 10*Hight, SCREENWIDTH-20*Width, 150*Hight)];
+    _view1.backgroundColor = [ UIColor colorWithHex:@"fc5400" andAlpha:1];
+    [self addSubview:_view1];
+}
+@end

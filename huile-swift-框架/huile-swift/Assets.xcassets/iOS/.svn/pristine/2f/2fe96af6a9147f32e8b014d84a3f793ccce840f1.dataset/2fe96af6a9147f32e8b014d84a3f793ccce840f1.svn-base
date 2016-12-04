@@ -1,0 +1,93 @@
+//
+//  AddoneController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "AddoneController.h"
+#import "AddtowController.h"
+
+@interface AddoneController ()
+
+@end
+
+@implementation AddoneController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"添加银行卡";
+    [self initSubview];
+    self.view.backgroundColor = [UIColor colorWithHex:@"f2f2f2" andAlpha:1];
+    
+}
+#pragma mark --methods
+-(void)initSubview{
+    UILabel * lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 44)];
+    lable.text =@"  请输入您的银行卡卡号";
+    lable.font =[UIFont systemFontOfSize:14];
+    lable.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    lable.textAlignment = NSTextAlignmentLeft;
+  
+    _field = [[UITextField alloc]initWithFrame: CGRectMake(0, 2*Hight+lable.bottom, SCREENWIDTH, 44*Hight)];
+    _field.backgroundColor = [UIColor whiteColor];
+    _field.borderStyle = UITextBorderStyleNone;
+    _field.text =@"  卡号";
+    _field.font =[UIFont systemFontOfSize:14];
+    _field.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, _field.bottom+2, SCREENWIDTH, 44)];
+    view1.backgroundColor = [UIColor whiteColor];
+    UILabel * lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+    lable1.text =@"  证件类型";
+    lable1.font = [UIFont systemFontOfSize:14];
+    lable1.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    lable1.textAlignment = NSTextAlignmentLeft;
+    UILabel * lable2 = [UILabel labelWithFrame:CGRectMake(lable1.right, 0, 40, 44) text:@"身份证" font:11 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+    [view1 addSubview:lable1];
+    [view1 addSubview:lable2];
+    _field1 = [[UITextField alloc]initWithFrame: CGRectMake(0, 2*Hight+view1.bottom, SCREENWIDTH, 44*Hight)];
+    _field1.backgroundColor = [UIColor whiteColor];
+    _field1.borderStyle = UITextBorderStyleNone;
+    _field1.text =@"  身份证号";
+    _field1.font =[UIFont systemFontOfSize:14];
+    _field1.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    [self.view addSubview:lable];
+    [self.view addSubview:_field];
+    [self.view addSubview:view1];
+    [self.view addSubview:_field1];
+    
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10*Width, _field1.bottom+50*Width, SCREENWIDTH-20*Width, 45) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"下一步" textFont:17 textColor:[UIColor whiteColor]];
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.layer.cornerRadius = 8.0;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+}
+#pragma mark ---action
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+-(void)push{
+    AddtowController * vc = [[AddtowController alloc] init];
+    vc.title = @"添加银行卡";
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,41 @@
+//
+//  UIButton+LzjButton.m
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 whluojiachuanyi. All rights reserved.
+//
+
+#import "UIButton+LzjButton.h"
+
+@implementation UIButton (LzjButton)
++(UIButton *)butonWithFrame:(CGRect)frame buttonType:(UIButtonType)type imageNamed:(NSString *)name text:(NSString*)text textFont:(CGFloat)fontSize textColor:(UIColor *)textColor {
+    
+    UIButton *btn = [UIButton buttonWithType:type];
+    btn.frame = frame;
+    [btn setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+    [btn setTitle:text forState:UIControlStateHighlighted];
+//    [btn setTitle:text forState:<#(UIControlState)#>]
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:fontSize]];
+    [btn setTitleColor:textColor forState:UIControlStateNormal];
+    
+    return btn;
+    
+}
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
+    [self setBackgroundImage:[UIButton imageWithColor:backgroundColor] forState:state];
+}
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+@end

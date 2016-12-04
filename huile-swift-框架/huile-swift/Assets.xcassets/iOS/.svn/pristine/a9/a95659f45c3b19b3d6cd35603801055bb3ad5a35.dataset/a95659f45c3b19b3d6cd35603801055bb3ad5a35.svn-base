@@ -1,0 +1,94 @@
+//
+//  AddtowController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "AddtowController.h"
+#import "AddThreeController.h"
+
+@interface AddtowController ()
+
+@end
+
+@implementation AddtowController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+  
+    self.view.backgroundColor = [UIColor colorWithHex:@"f2f2f2" andAlpha:1];
+    [self initsubview];
+}
+#pragma mark --methods
+-(void)initsubview{
+    UILabel * lable =[UILabel labelWithFrame:CGRectMake(0, 10*Hight, 60*Width, 44*Hight) text:@"  银行卡" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable.backgroundColor = [UIColor whiteColor];
+    _field = [[UITextField alloc] initWithFrame:CGRectMake(lable.right, 10*Hight, SCREENWIDTH-50*Width, 44*Hight)];
+    _field.backgroundColor = [UIColor whiteColor];
+    _field.borderStyle = UITextBorderStyleNone;
+    _field.placeholder = @"  xx银行卡";
+    _field.font =[UIFont systemFontOfSize:11];
+    UILabel * lable1 =[UILabel labelWithFrame:CGRectMake(0, lable.bottom+2*Hight, 50*Width, 44*Hight) text:@"  卡号" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable1.backgroundColor = [UIColor whiteColor];
+    _field1 = [[UITextField alloc] initWithFrame:CGRectMake(lable1.right, 2*Hight+_field.bottom, SCREENWIDTH-50*Width, 44*Hight)];
+    _field1.backgroundColor = [UIColor whiteColor];
+    _field1.borderStyle = UITextBorderStyleNone;
+    _field1.placeholder = @"  xxxxxxx";
+    _field1.font = [UIFont systemFontOfSize:14];
+    UILabel * lable2 =[UILabel labelWithFrame:CGRectMake(0, lable1.bottom+2*Hight, 50*Width, 44*Hight) text:@"  姓名" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable2.backgroundColor = [UIColor whiteColor];
+    _field2 = [[UITextField alloc] initWithFrame:CGRectMake(lable2.right, 2*Hight+_field1.bottom, SCREENWIDTH-50*Width, 44*Hight)];
+    _field2.backgroundColor = [UIColor whiteColor];
+    _field2.borderStyle = UITextBorderStyleNone;
+    _field2.placeholder = @"  持卡人姓名";
+    _field2.font =[UIFont systemFontOfSize:11];
+    UILabel * lable3 =[UILabel labelWithFrame:CGRectMake(0, lable2.bottom+2*Hight, 60*Width, 44*Hight) text:@"  手机号" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    lable3.backgroundColor = [UIColor whiteColor];
+    _field3 = [[UITextField alloc] initWithFrame:CGRectMake(lable3.right, 2*Hight+_field2.bottom, SCREENWIDTH-50*Width, 44*Hight)];
+    _field3.backgroundColor = [UIColor whiteColor];
+    _field3.borderStyle = UITextBorderStyleNone;
+    _field3.textColor = [UIColor colorWithHex:@"333333" andAlpha:1];
+    _field3.placeholder = @"  银行预留手机号码";
+    _field3.font = [UIFont systemFontOfSize:14];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10*Width, _field3.bottom+50*Width, SCREENWIDTH-20*Width, 45) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"下一步" textFont:17 textColor:[UIColor whiteColor]];
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.layer.cornerRadius = 8.0;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:lable];
+    [self.view addSubview:lable1];
+    [self.view addSubview:lable2];
+    [self.view addSubview:lable3];
+    [self.view addSubview:_field];
+    [self.view addSubview:_field1];
+    [self.view addSubview:_field2];
+    [self.view addSubview:_field3];
+    [self.view addSubview:button];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark ---action
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+-(void)push{
+    AddThreeController * vc = [[AddThreeController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+
+    
+}
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

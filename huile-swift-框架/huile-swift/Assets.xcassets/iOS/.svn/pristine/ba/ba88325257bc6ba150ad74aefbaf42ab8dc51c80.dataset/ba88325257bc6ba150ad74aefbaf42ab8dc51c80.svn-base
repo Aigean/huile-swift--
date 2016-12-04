@@ -1,0 +1,13 @@
+//
+//  ShowDetailPicViewController.h
+//  huile
+//
+//  Created by  周毅 on 16/3/25.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ShowDetailPicViewController : UIViewController
+
+@end

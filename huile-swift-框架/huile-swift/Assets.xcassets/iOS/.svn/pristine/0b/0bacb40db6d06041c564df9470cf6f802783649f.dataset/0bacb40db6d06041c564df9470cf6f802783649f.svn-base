@@ -1,0 +1,78 @@
+//
+//  FeedbackCell.m
+//  huile
+//
+//  Created by  周毅 on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "FeedbackCell.h"
+
+@implementation FeedbackCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"FeedbackCell";
+    FeedbackCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[FeedbackCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        
+    }
+    return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    
+   
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initCell];
+    }
+    
+    return self;
+}
+- (void) initCell
+{
+    
+    UIView *cellView = [[UIView alloc]init];
+    [self addSubview:cellView];
+    
+    
+    UILabel *buyerFeedback = [[UILabel alloc]initWithFrame:KCGRECT(20, 20, 170, 30)];
+    buyerFeedback.text = @"买家评价";
+    [cellView addSubview:buyerFeedback];
+    self.buyerFeedback = buyerFeedback;
+    
+    UIView *line = [[UIView alloc]initWithFrame:KCGRECT(20, 70, 730, 1)];
+    [cellView addSubview:line];
+    line.backgroundColor = [UIColor colorWithHex:@"cccccc" andAlpha:1.0f];
+    
+    
+    UIImageView *imageStar = [[UIImageView alloc]initWithFrame:KCGRECT(190, 20, 100, 30)];
+    [cellView addSubview:imageStar];
+    imageStar.image = [UIImage imageNamed:@"star.png"];
+    self.imageStar = imageStar;
+    
+    UILabel *feedbackContent = [[UILabel alloc]init];
+    [cellView addSubview:feedbackContent];
+    feedbackContent.text = @"评价内容评评价内容评评价内容评评价内容评评价内容评评价内容评评价内容评评价内容评评价内容评评价内容评评价内r";
+    feedbackContent.font = [UIFont systemFontOfSize:14];
+    feedbackContent.numberOfLines = 0;
+    self.feedbackContent = feedbackContent;
+    
+    CGSize boundSize = CGSizeMake(SCREEN_WIDTH , MAXFLOAT);
+    CGSize realSize  = [self.feedbackContent.text getRealSizeWithMaxSize:boundSize font:self.feedbackContent.font];
+    feedbackContent.frame = CGRectMake(10, 30, SCREEN_WIDTH - 20, realSize.height + 30);
+    
+    self.frame = CGRectMake(0, 0,SCREEN_WIDTH , realSize.height + 65);
+    
+    UIView *bottomLine = [[UIView alloc]init];
+    bottomLine.backgroundColor = [UIColor colorWithHex:@"cccccc" andAlpha:1.0f];
+    bottomLine.frame = CGRectMake(0, realSize.height + 64, SCREEN_WIDTH, 1);
+    [self addSubview:bottomLine];
+
+    
+}
+
+@end

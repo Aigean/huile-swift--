@@ -1,0 +1,20 @@
+//
+//  HomeViewController.h
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface HomeViewController : UIViewController
+
+//@property(nonatomic,strong)UIView    *firstView;
+//@property(nonatomic,strong)UIButton  *smallButton;
+
+
+@property(nonatomic, strong) UITableView    *tableView;
+@property(nonatomic, strong) NSMutableArray *menuArray;
+@property(nonatomic, strong) UIButton       *leftBtn;
+@end

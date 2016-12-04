@@ -1,0 +1,131 @@
+//
+//  PayViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/24.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "PayViewController.h"
+#import "RechargetowController.h"
+
+@interface PayViewController ()
+
+@property (nonatomic, strong) UIView *lineView;
+
+@end
+
+@implementation PayViewController
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"支付";
+    self.view.backgroundColor = [UIColor colorWithHex:@"f2f2f2" andAlpha:1.0f];
+    
+    [self setStaticLabel];
+    [self setAmount];
+    [self setPayButton];
+}
+
+- (void)setStaticLabel
+{
+    UILabel *staticLabel = [[UILabel alloc]init];
+    staticLabel.frame = KCGRECT(20, 0, 710, 89);
+    staticLabel.text = @"详细金额请询问服务员";
+    staticLabel.textAlignment = NSTextAlignmentLeft;
+    staticLabel.backgroundColor = [UIColor colorWithHex:@"f2f2f2" andAlpha:1.0f];
+    [self.view addSubview:staticLabel];
+    
+    UIView *viewLine = [[UIView alloc]initWithFrame:KCGRECT(0, 89, 750, 1)];
+    viewLine.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:viewLine];
+    
+    
+    
+}
+- (void)setAmount
+
+{
+    UILabel *amountLabel = [[UILabel alloc]init];
+    amountLabel.frame = KCGRECT(700, 90, 50, 89);
+    amountLabel.backgroundColor = [UIColor whiteColor];
+    amountLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:amountLabel];
+    amountLabel.text = @"元";
+    amountLabel.textColor = [UIColor lightGrayColor];
+    
+   
+    
+    UITextField *textFiled = [[UITextField alloc]initWithFrame:KCGRECT(0, 90, 700, 89)];
+    textFiled.borderStyle = UITextBorderStyleNone;
+    textFiled.backgroundColor = [UIColor whiteColor];
+    textFiled.placeholder = @"    请输入金额";
+    [self.view addSubview:textFiled];
+    
+    
+    
+    UIView *viewLine = [[UIView alloc]initWithFrame:KCGRECT(0, 179, 750, 1)];
+    viewLine.backgroundColor = [UIColor colorWithHex:@"cccccc" andAlpha:1.0f];
+    [self.view addSubview:viewLine];
+    
+    
+    
+    UILabel *amountLabel2 = [[UILabel alloc]init];
+    amountLabel2.frame = KCGRECT(0, 180, 600, 89);
+    amountLabel2.backgroundColor = [UIColor whiteColor];
+    amountLabel2.text = @"    优惠：9折";
+    amountLabel2.textColor = [UIColor lightGrayColor];
+    [self.view addSubview:amountLabel2];
+    
+    
+    
+    UIView *viewLine2 = [[UIView alloc]initWithFrame:KCGRECT(0, 269, 750, 1)];
+    viewLine2.backgroundColor = [UIColor colorWithHex:@"cccccc" andAlpha:1.0f];
+    [self.view addSubview:viewLine2];
+    
+    
+    UILabel *amounLable3 = [[UILabel alloc]initWithFrame:KCGRECT(600, 180, 150, 89)];
+    amounLable3.text = @"￥540";
+    amounLable3.textColor = [UIColor orangeColor];
+    amounLable3.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:amounLable3];
+}
+
+- (void)setPayButton
+{
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn.frame = KCGRECT(20, 370, 710, 90);
+    [self.view addSubview:btn];
+    //btn = [UIButton UIButtonTypeDetailDisclosure];
+    btn.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    btn.layer.cornerRadius = 8 ;// 这个值根据你想要的效果可以更改
+    //btn.clipsToBounds = true;
+    [btn addTarget:self action:@selector(charge) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"支付" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:22];
+   
+    
+}
+#pragma mark --action
+-(void)charge{
+    RechargetowController * vc = [[RechargetowController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+@end

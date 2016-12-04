@@ -1,0 +1,75 @@
+//
+//  SecondViewCell.m
+//  huile
+//
+//  Created by mac on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "SecondViewCell.h"
+#import "TopNewInfoModel.h"
+#define TN_Topics_Feature @"http://c.m.163.com/nc/ad/headline/0-4.html"
+
+
+@implementation SecondViewCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"SecondViewCell";
+    SecondViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[SecondViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return cell;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initViews];
+    }
+    return self;
+}
+
+- (void)initViews
+{
+    //轮播
+    _topNewsView = [[TopNewsView alloc] initWithFrame:CGRectMake(0, 0, MainScreen_Width, MainScreen_Height/4)] ;
+    [self addSubview:_topNewsView];
+    _homePageNewsData = [NSMutableArray array];
+    [self getTopNews];
+    currentPage = 0;
+}
+- (TopNewsView *)topNewsView
+{
+    if (!_topNewsView) {
+        _topNewsView.backgroundColor = [UIColor clearColor];
+    }
+    return _topNewsView;
+}
+
+- (void)getTopNews
+{
+    NSString * urlStr = TN_Topics_Feature;
+    NSURL * url = [NSURL URLWithString:urlStr];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError != nil) {
+            NSLog(@"%@", connectionError);
+            return ;
+        }
+        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSArray * array = dict[@"headline_ad"];
+        self.array = [[NSMutableArray alloc] initWithCapacity:10];
+        for (NSDictionary * dict in array) {
+            [self.array addObject:[[TopNewInfoModel alloc] initWithAttributes:dict]];
+        }
+        self.topNewsView.homeTopNews = self.array;
+        [self.topNewsView startAnimation];
+    }];
+}
+
+
+
+@end

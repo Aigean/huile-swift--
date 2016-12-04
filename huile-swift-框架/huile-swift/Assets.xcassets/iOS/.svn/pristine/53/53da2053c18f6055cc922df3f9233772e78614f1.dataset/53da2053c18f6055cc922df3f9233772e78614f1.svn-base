@@ -1,0 +1,22 @@
+//
+//  FeedbackCell.h
+//  huile
+//
+//  Created by  周毅 on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface FeedbackCell : UITableViewCell
+
+@property (nonatomic, weak) UILabel *buyerFeedback;
+
+@property (nonatomic, weak) UIImageView *imageStar;
+/** 评价内容 */
+@property (nonatomic, weak) UILabel *feedbackContent;
+
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
+@end

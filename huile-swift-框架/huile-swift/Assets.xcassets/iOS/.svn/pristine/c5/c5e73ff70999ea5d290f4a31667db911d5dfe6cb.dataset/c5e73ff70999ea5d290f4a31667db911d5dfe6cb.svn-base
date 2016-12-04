@@ -1,0 +1,197 @@
+//
+//  RechargetowController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "RechargetowController.h"
+#import "ChooseCell.h"
+#import "ChooseCardCell.h"
+#import "PasswordInput.h"
+#import "charge.h"
+#import "sureview.h"
+#import "MBProgressHUD+UP.h"
+#import "FindbackController.h"
+#define LLKeyWindow [UIApplication sharedApplication].keyWindow
+
+NSInteger touchid;
+@interface RechargetowController ()<UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic,strong)UITableView * tableview;
+@end
+
+@implementation RechargetowController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"充值";
+    [self initsubview];
+}
+#pragma mark 加载子视图
+-(void)initsubview{
+    UILabel * lable = [UILabel labelWithFrame:CGRectMake(10*Width, 0, 150*Width, 45*Hight) text:@"您所需要支付费用" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UILabel *lable1 = [UILabel labelWithFrame:CGRectMake(lable.right+5*Width, lable.top, 40*Width, 45*Hight) text:@"540" font:14 textColor:[UIColor colorWithHex:@"fc0000" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    _tableview = [UITableView initWithTableView:CGRectMake(0, 45*Width, SCREENWIDTH, SCREENHEIGHT-45*Hight-280*Hight) withDelegate:self];
+//    _tableview.backgroundColor = [UIColor grayColor];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(10, _tableview.bottom +60, SCREENWIDTH-20, 44) buttonType:UIButtonTypeRoundedRect imageNamed:nil text:@"确定" textFont:17 textColor:[UIColor whiteColor]];
+    button.layer.cornerRadius = 8.0;
+    button.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [self.view addSubview:_tableview];
+    [self.view addSubview:lable];
+    [self.view addSubview:lable1];
+}
+#pragma mark - delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray * imgs = @[@"zhifubao",@"weixinzhifu",@"zhifubao"];
+    NSArray * text = @[@"支付宝",@"微信",@"银联"];
+    if (indexPath.row<3) {
+        ChooseCell * cell = [ChooseCell cellWithTableView:tableView Image:imgs[indexPath.row] text:text[indexPath.row]];
+        cell.btn.tag = indexPath.row;
+        cell.btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREENWIDTH-30*Width, 20*Hight, 20*Width, 20*Hight)];
+        cell.btn.backgroundColor = [UIColor clearColor];
+
+        [cell.btn setImage:[UIImage imageNamed:@"fankui"] forState:UIControlStateNormal];
+        [cell.btn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
+        
+        [cell.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:cell.btn];
+        return cell;
+    }
+    ChooseCardCell * cell = [ChooseCardCell cellWithTableView:tableView];
+    cell.imageView.image = [UIImage imageNamed:imgs[indexPath.row-3]];
+    cell.btn.tag = indexPath.row;
+    cell.btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREENWIDTH-30*Width, 20*Hight, 20*Width, 20*Hight)];
+    cell.btn.backgroundColor = [UIColor clearColor];
+    
+    [cell.btn setImage:[UIImage imageNamed:@"fankui"] forState:UIControlStateNormal];
+    [cell.btn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
+    
+    [cell.contentView addSubview:cell.btn];
+    [cell.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+       return cell;
+
+}
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark -action
+-(void)push{
+    charge *view = [[charge alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    view.backgroundColor = [UIColor grayColor];
+    view.alpha =0.95;
+    [view.btn addTarget:self action:@selector(sure) forControlEvents:UIControlEventTouchUpInside];
+    [view.btn1 addTarget:self action:@selector(findback) forControlEvents:UIControlEventTouchUpInside];
+     [LLKeyWindow addSubview:view];
+}
+-(void)findback{
+    for (UIView *view in LLKeyWindow.subviews) {
+        if ([view isKindOfClass:[charge class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    FindbackController * vc = [[FindbackController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)sure{
+
+    [MBProgressHUD showSuccess:@"支付成功"];
+    
+}
+//- (void)buttonClick1:(UIButton *)sender{
+//    UIButton * button =(UIButton *)sender;
+//    button.selected = !button.selected;
+//    
+//}
+- (void)buttonClick:(UIButton *)sender
+{
+//    UIButton *btn  = (UIButton *)sender;
+//    UIButton *btn1 = (UIButton *)[self.view viewWithTag:touchid];
+//    if (touchid >0) {
+//        btn1.selected = NO;
+//        btn.selected = YES;
+//     }
+//
+//
+//    if((touchid = sender.tag)){
+//        btn1.selected = !btn1.selected;
+//    }else{
+//        btn1.selected = NO;
+//        btn.selected = YES;
+//        touchid = sender.tag;
+//    }
+//    if (touchid <=0){
+//    btn.selected = YES;
+
+//    }
+
+
+    
+}
+//-(void)ppp:(UIButton *)sender {
+//    UIButton*btn1=(UIButton*)[self.view viewWithTag:0];
+//    UIButton*btn2=(UIButton*)[self.view viewWithTag:1];
+//    UIButton*btn3=(UIButton*)[self.view viewWithTag:2];
+//    UIButton*btn4=(UIButton*)[self.view viewWithTag:3];
+//    UIButton*btn5=(UIButton*)[self.view viewWithTag:4];
+//    
+//      if (sender.tag ==0) {
+//       
+//        btn1.selected=!btn1.selected;
+//        btn2.selected=NO;
+//        btn3.selected=NO;
+//        btn4.selected=NO;
+//        btn5.selected=NO;
+//    }else if (sender.tag ==1){
+//        btn2.selected=YES;
+//        btn1.selected=NO;
+//        btn3.selected=NO;
+//        btn4.selected=NO;
+//        btn5.selected=NO;
+//        
+//    }
+//    else if (sender.tag ==2){
+//        btn3.selected=YES;
+//        btn2.selected=NO;
+//        btn1.selected=NO;
+//        btn4.selected=NO;
+//        btn5.selected=NO;
+//        
+//    }else if (sender.tag ==3){
+//        btn4.selected=YES;
+//        btn2.selected=NO;
+//        btn3.selected=NO;
+//        btn1.selected=NO;
+//        btn5.selected=NO;
+//        
+//    }
+//        btn5.selected=YES;
+//        btn2.selected=NO;
+//        btn3.selected=NO;
+//        btn4.selected=NO;
+//        btn1.selected=NO;
+//        
+//    
+//  
+//    
+//}
+
+@end

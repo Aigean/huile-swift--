@@ -1,0 +1,19 @@
+//
+//  AnnotationModel.h
+//  huile
+//
+//  Created by  周毅 on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
+
+@interface AnnotationModel : NSObject <MKAnnotation>
+
+@property (nonatomic, copy) NSString *iconName;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property(nonatomic, readonly, copy) NSString *title;
+@property(nonatomic, readonly, copy) NSString *subtitle;
+
+@end

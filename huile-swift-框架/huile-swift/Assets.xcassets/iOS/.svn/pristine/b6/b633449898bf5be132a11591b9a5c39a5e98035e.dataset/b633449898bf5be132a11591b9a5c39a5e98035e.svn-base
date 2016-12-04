@@ -1,0 +1,44 @@
+//
+//  UIButton+MyExtension.m
+//  weiyuan
+//
+//  Created by 秦仕海 on 15/7/23.
+//  Copyright (c) 2015年 Kiwaro. All rights reserved.
+//[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:0.7]
+
+#import "UIButton+MyExtension.h"
+
+@implementation UIButton (MyExtension)
++ (UIButton *)myButtonWithTitle:        (NSString *)title
+                       target:(id)target
+                     selector:(SEL)selector
+                        frame:(CGRect)frame
+                        image:(UIImage *)image
+                darkTextColor:(BOOL)darkTextColor
+{
+    UIButton *button = [[UIButton alloc] initWithFrame:frame];
+    UIImageView * buttonImageView = [[UIImageView alloc] initWithFrame:CGRectMake(23 , -button.titleLabel.bounds.size.width + 11 , 5, 8)];
+    buttonImageView.image = image;
+    [button addSubview:buttonImageView];
+    [button.layer setMasksToBounds:YES];
+    [button.layer setBorderWidth:0];
+    button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    button.contentHorizontalAlignment = 1;
+    [button setTitle:title forState:UIControlStateNormal];
+    UIFont * newFont = [UIFont fontWithName:@"Arial" size:10.0];
+    button.titleLabel.font = newFont;
+
+    if (darkTextColor)
+    {
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside]; 
+    return button;
+}
+
+@end

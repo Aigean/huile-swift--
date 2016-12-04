@@ -1,0 +1,141 @@
+//
+//  MerchantDetailViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "MerchantDetailViewController.h"
+#import "DetailPicture.h"
+#import "DetailShopName.h"
+#import "DetailLocal.h"
+#import "DetailFeedback.h"
+#import "DetailSimilar.h"
+#import "DetailFooter.h"
+#import "ShowDetailPicViewController.h"
+#import "Detailssss.h"
+#import "MapViewController.h"
+#import "AllReviewViewController.h"
+#import "PayViewController.h"
+
+@interface MerchantDetailViewController ()<UIActionSheetDelegate>
+
+@end
+
+@implementation MerchantDetailViewController
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    UIScrollView *scrollView = [[UIScrollView alloc]init];
+    scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    scrollView.contentSize = CGSizeMake(0 , (1880.0/750)*SCREEN_WIDTH);
+    scrollView.backgroundColor = [UIColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0f];
+    scrollView.bounces = NO;
+    self.view.backgroundColor = [UIColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0f];
+       
+    
+    
+    
+    
+    
+    
+    DetailPicture *detailpic = [[DetailPicture alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 370.0/750*SCREEN_WIDTH)];
+    DetailShopName *detailShop = [[DetailShopName alloc]initWithFrame:CGRectMake(0, 370.0/750*SCREEN_WIDTH, SCREEN_WIDTH, 122.0/750*SCREEN_WIDTH)];
+    DetailLocal *detailLocal = [[DetailLocal alloc]initWithFrame:CGRectMake(0, 494.0/750*SCREEN_WIDTH, SCREEN_WIDTH, 88.0/750*SCREEN_WIDTH)];
+    DetailFeedback *detailFeedback = [[DetailFeedback alloc]initWithFrame:CGRectMake(0, 604.0/750*SCREEN_WIDTH, SCREEN_WIDTH, 418.0/750*SCREEN_WIDTH)];
+    DetailSimilar *detailSimilar = [[DetailSimilar alloc]initWithFrame:CGRectMake(0, 1042.0/750*SCREEN_WIDTH, SCREEN_WIDTH, 90.0/750*SCREEN_WIDTH)];
+    DetailFooter *detailFooter = [[DetailFooter alloc]initWithFrame:KCGRECT(0, 1236, 750, 98)];
+    Detailssss *detailSsss = [[Detailssss alloc]initWithFrame:KCGRECT(0, 1133, 750, 629)];
+    
+    
+    
+    [detailFooter.btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [detailFooter.payButton addTarget:self action:@selector(payBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [detailLocal.buttonAddress addTarget:self action:@selector(pushToMap) forControlEvents:UIControlEventTouchUpInside];
+    [detailpic.navLeftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [detailLocal.btnPhone addTarget:self action:@selector(phoneCall) forControlEvents:UIControlEventTouchUpInside];
+    [detailFeedback.btnMore addTarget:self action:@selector(seeAllComment) forControlEvents:UIControlEventTouchUpInside];
+    
+
+    [self.view  addSubview:scrollView];
+    [scrollView addSubview:detailFeedback];
+    [scrollView addSubview:detailShop];
+    [scrollView addSubview:detailpic];
+    [scrollView addSubview:detailLocal];
+    [scrollView addSubview:detailSimilar];
+    [scrollView addSubview:detailSsss];
+    [self.view  addSubview:detailFooter];
+    
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+}
+
+// 跳转查看店铺详情图片界面
+- (void)btnClick
+{
+    ShowDetailPicViewController *VC = [[ShowDetailPicViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:NO];
+}
+
+// 返回到商家页面
+- (void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 跳转到地图界面
+- (void)pushToMap
+{
+    MapViewController *mapVC = [[MapViewController alloc]init];
+    [self.navigationController pushViewController:mapVC animated:NO];
+    
+}
+
+// 跳转查看全部评论页面
+- (void)seeAllComment
+{
+    AllReviewViewController *VC = [[AllReviewViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:NO];
+}
+
+// 拨打电话
+- (void)phoneCall
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"13000000000" otherButtonTitles:nil, nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+    
+    [actionSheet showInView:self.view];
+    
+}
+
+- (void)payBtnClick
+{
+    PayViewController *payVC = [[PayViewController alloc]init];
+    [self.navigationController pushViewController:payVC animated:YES];
+    
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"tel://13517220547"]];
+    }
+}
+
+
+@end

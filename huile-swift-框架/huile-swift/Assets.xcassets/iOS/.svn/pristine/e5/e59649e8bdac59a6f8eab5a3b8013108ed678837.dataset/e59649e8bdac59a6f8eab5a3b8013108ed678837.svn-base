@@ -1,0 +1,52 @@
+//
+//  ShareCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/30.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "ShareCell.h"
+
+@implementation ShareCell
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"CollectTableViewCell";
+    ShareCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[ShareCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.imageView.image =[UIImage imageNamed:@"zhifubao"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+        cell.backgroundColor = [UIColor colorWithHex:@"ffffff" andAlpha:1];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSString *destDateString = [dateFormatter stringFromDate:date];
+        cell.detailTextLabel.text =destDateString;
+        cell.textLabel.text = @"系统返利";
+    }
+    return cell;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        [self initViews];
+    }
+    return self;
+}
+
+- (void)initViews
+{
+    _label = [UILabel labelWithFrame:CGRectMake(self.width-50, 0, 70, 45) text:@"$111" font:14 textColor:[UIColor colorWithHex:@"fd0000" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UILabel* label = [UILabel labelWithFrame:CGRectMake(_label.left-10, 14, 10, 20) text:@"+" font:10 textColor:[UIColor colorWithHex:@"fd0000" andAlpha:1] textAlignment:NSTextAlignmentRight];
+    [self addSubview:label];
+    [self addSubview:_label];
+    
+    
+    }
+
+@end

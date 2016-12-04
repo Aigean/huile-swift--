@@ -1,0 +1,13 @@
+//
+//  CommonLabelItem.m
+//  SuperSecretary
+//
+//  Created by mac on 15/12/2.
+//  Copyright (c) 2015年 谢腾飞. All rights reserved.
+//
+
+#import "CommonLabelItem.h"
+
+@implementation CommonLabelItem
+
+@end

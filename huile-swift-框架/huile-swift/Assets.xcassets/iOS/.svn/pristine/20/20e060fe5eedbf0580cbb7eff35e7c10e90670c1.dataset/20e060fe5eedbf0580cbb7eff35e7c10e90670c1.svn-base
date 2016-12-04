@@ -1,0 +1,13 @@
+//
+//  chargerecordController.h
+//  huile
+//
+//  Created by LZJ on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface chargerecordController : UIViewController
+
+@end

@@ -1,0 +1,28 @@
+//
+//  PaymentTableViewCell.h
+//  huile
+//
+//  Created by mac on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface PaymentTableViewCell : UITableViewCell
+
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
+@property (nonatomic , strong) UIView      * backView;
+//图片
+@property (nonatomic , strong) UIImageView * leftImgView;
+//name
+@property (nonatomic , strong) UILabel     * nameLabel;
+
+//
+@property (nonatomic , strong) UILabel     * titleLabel;
+//
+@property (nonatomic , strong) UILabel     * timeLabel;
+
+
+@end

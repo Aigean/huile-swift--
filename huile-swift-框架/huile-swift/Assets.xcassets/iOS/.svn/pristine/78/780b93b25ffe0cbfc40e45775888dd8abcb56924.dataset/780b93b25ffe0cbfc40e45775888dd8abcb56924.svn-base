@@ -1,0 +1,23 @@
+//
+//  UITableView+LzjTableView.m
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 whluojiachuanyi. All rights reserved.
+//
+
+#import "UITableView+LzjTableView.h"
+
+@implementation UITableView (LzjTableView)
++ (UITableView *)initWithTableView:(CGRect)frame withDelegate:(id)delegate
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    tableView.delegate = delegate;
+    tableView.dataSource = delegate;
+    //将系统的Separator左边不留间隙
+    tableView.separatorInset = UIEdgeInsetsZero;
+    return tableView;
+}
+
+
+@end

@@ -1,0 +1,13 @@
+//
+//  CommonArrowItem.h
+//  SuperSecretary
+//
+//  Created by mac on 15/11/22.
+//  Copyright (c) 2015年 谢腾飞. All rights reserved.
+//
+
+#import "CommonItem.h"
+
+@interface CommonArrowItem : CommonItem
+
+@end

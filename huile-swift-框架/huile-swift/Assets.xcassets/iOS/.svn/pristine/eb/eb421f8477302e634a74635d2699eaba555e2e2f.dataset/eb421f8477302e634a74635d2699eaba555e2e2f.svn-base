@@ -1,0 +1,59 @@
+//
+//  charge.m
+//  huile
+//
+//  Created by LZJ on 16/3/26.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "charge.h"
+#import "PasswordInput.h"
+#define LLKeyWindow [UIApplication sharedApplication].keyWindow
+
+@implementation charge
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+    self.backgroundColor = [UIColor colorWithHex:@"ffffff" andAlpha:1];
+    [self initsubview];
+    }
+    return self;
+}
+#pragma mark --加载视图
+-(void)initsubview{
+        UIView * view2= [[UIView alloc] initWithFrame:CGRectMake((SCREENWIDTH-300*Width)/2, (SCREENHEIGHT-200*Hight)/2-70, 300*Width, 200*Hight)];
+        view2.backgroundColor = [UIColor colorWithHex:@"ffffff" andAlpha:1];
+       [view2 setAlpha:1];
+        UILabel * lab= [UILabel labelWithFrame:CGRectMake((view2.width-100*Width)/2, 20*Hight, 100*Width, 20*Width) text:@"支付费用" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+        UIButton * btnx=[UIButton butonWithFrame:CGRectMake(view2.width-42*Width, 12*Width, 30*Width, 30*Hight) buttonType:UIButtonTypeCustom imageNamed:@"guanbi" text:nil textFont:0 textColor:nil];
+        [btnx addTarget:self action:@selector(push1) forControlEvents:UIControlEventTouchUpInside];
+    
+        _lab1= [UILabel labelWithFrame:CGRectMake((view2.width-65*Width)/2, 10*Hight +lab.bottom, 65*Width, 20*Width) text:@"540" font:14 textColor:[UIColor colorWithHex:@"fd0000" andAlpha:1] textAlignment:NSTextAlignmentCenter];
+       UILabel * lab2= [UILabel labelWithFrame:CGRectMake((view2.width-115*Width)/2, 10*Hight+_lab1.bottom, 115*Width, 20*Width) text:@"请输入支付密码" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+       _btn1=[UIButton butonWithFrame:CGRectMake(lab2.right, lab2.bottom-20*Width, 60*Width, 20*Width) buttonType:UIButtonTypeCustom imageNamed:nil text:@"找回密码" textFont:11 textColor:[UIColor colorWithHex:@"fc5400" andAlpha:1]];
+        _input1 = [[PasswordInput alloc] initWithFrame:CGRectMake(30*Width, lab2.bottom+10*Width, view2.width-60*Width, 30*Hight)];
+        _btn=[UIButton butonWithFrame:CGRectMake(0, _input1.bottom+10*Width, view2.width, 30*Hight) buttonType:UIButtonTypeCustom imageNamed:nil text:@"确认支付" textFont:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1]];
+        view2.layer.cornerRadius =8.0;
+        view2.tag =101;
+        [view2 addSubview:lab];
+        [view2 addSubview:_lab1];
+        [view2 addSubview:lab2];
+        [view2 addSubview:btnx];
+        [view2 addSubview:_btn];
+        [view2 addSubview:_btn1];
+        [view2 addSubview:_input1];
+        [self addSubview:view2];
+ }
+-(void)push1{
+    for (UIView *view in LLKeyWindow.subviews) {
+        if ([view isKindOfClass:[charge class]]) {
+            [view removeFromSuperview];
+        }
+}
+
+
+}
+@end
+

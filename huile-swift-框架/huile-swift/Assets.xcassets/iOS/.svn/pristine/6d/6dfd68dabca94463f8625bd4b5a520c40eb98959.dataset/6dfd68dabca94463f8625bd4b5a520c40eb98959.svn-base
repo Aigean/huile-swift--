@@ -1,0 +1,86 @@
+//
+//  DetailLocal.m
+//  huile
+//
+//  Created by  周毅 on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "DetailLocal.h"
+@interface DetailLocal ()
+@property (nonatomic, weak) UIImageView *imageLocal;
+
+/** 分隔线 */
+@property (nonatomic, weak) UILabel *labelLine;
+
+@end
+
+@implementation DetailLocal
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90.0/750*SCREEN_WIDTH)];
+        view.backgroundColor = [UIColor whiteColor];
+        [self addSubview:view];
+        // 定位图片
+        UIImageView *imageLocal = [[UIImageView alloc]init];
+        [view addSubview:imageLocal];
+        self.imageLocal = imageLocal;
+        imageLocal.image = [UIImage imageNamed:@"map"];
+    
+        
+        // 店铺地址
+        UIButton *buttonAddress = [[UIButton alloc]init];
+        [view addSubview:buttonAddress];
+        self.buttonAddress = buttonAddress;
+        [buttonAddress setTitle:@"洪山区街道口珞喻路创意城四楼" forState:UIControlStateNormal];
+       
+        //设置button 文字居左
+        buttonAddress.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [buttonAddress setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        buttonAddress.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        
+        
+        UILabel *labelLine = [[UILabel alloc]init];
+        [view  addSubview:labelLine];
+        self.labelLine = labelLine;
+        labelLine.backgroundColor = [UIColor lightGrayColor];
+        
+        UIButton *btnPhone = [[UIButton alloc]init];
+        //[btnPhone setBackgroundImage:[UIImage imageNamed:@"dianhua"] forState:UIControlStateNormal];
+        UIImageView *phoneImg = [[UIImageView alloc]initWithFrame:KCGRECT(39, 30, 30, 30)];
+        phoneImg.image = [UIImage imageNamed:@"dianhua"];
+        [btnPhone addSubview:phoneImg];
+        
+        
+        
+        [view addSubview:btnPhone];
+       
+        self.btnPhone = btnPhone;
+                
+    }
+    
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+   
+    self.imageLocal.frame = CGRectMake(20.0/750*SCREEN_WIDTH, 25.0/750*SCREEN_WIDTH, 32.0/750*SCREEN_WIDTH, 43.0/750*SCREEN_WIDTH);
+    self.buttonAddress.frame = CGRectMake(65.0/750*SCREEN_WIDTH, 32.0/750*SCREEN_WIDTH, 500.0/750*SCREEN_WIDTH, 28.0/750*SCREEN_WIDTH);
+    self.labelLine.frame = CGRectMake(640.0/750*SCREEN_WIDTH, 10.0/750*SCREEN_WIDTH, 2.0/750*SCREEN_WIDTH, 70.0/750*SCREEN_WIDTH);
+    //self.btnPhone.frame = CGRectMake(642.0/750*SCREEN_WIDTH, 0, 108.0/750*SCREEN_WIDTH, 70.0/750*SCREEN_WIDTH);
+    self.btnPhone.frame = KCGRECT(642, 0, 108, 90);
+    
+    
+}
+
+- (void)phoneCall
+{
+    NSLog(@"lalla");
+}
+
+@end

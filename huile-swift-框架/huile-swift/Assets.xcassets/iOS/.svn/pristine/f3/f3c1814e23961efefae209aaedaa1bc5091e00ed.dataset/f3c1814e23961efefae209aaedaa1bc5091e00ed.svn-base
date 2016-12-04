@@ -1,0 +1,76 @@
+//
+//  ShareViewController.m
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "ShareViewController.h"
+#import "UMSocial.h"
+#import "ShareMoneyController.h"
+
+@interface ShareViewController ()
+
+@end
+
+@implementation ShareViewController
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initSubView];
+    self.title =@"分享";
+}
+#pragma mark --- mehods
+-(void)initSubView{
+    UIButton * Btn = [UIButton butonWithFrame:CGRectMake(0, 0, 60, 35) buttonType:UIButtonTypeCustom imageNamed:nil text:@"分享收入" textFont:14 textColor:[UIColor colorWithHex:@"999999" andAlpha:1]];
+    [Btn addTarget:self action:@selector(pushshare) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    _imageview = [[UIImageView alloc] initWithFrame:CGRectMake(91.5*Width, 30*Hight, 191.5, 191.5)];
+    _imageview.layer.cornerRadius = 95.75;
+    _imageview.backgroundColor = [UIColor purpleColor];
+    _lable = [UILabel labelWithFrame:CGRectMake(0, _imageview.bottom+20*Hight, SCREENWIDTH, 230*Hight) text:@"公司简介" font:14 textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft];
+//    UIButton * button = [[UIButton butonWithFrame: CGRectMake(0, _lable.bottom, 100*Width, 30*Hight) buttonType:UIButtonTypeCustom imageNamed:nil text:@"分享" textFont:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1]];
+    UIButton * button = [UIButton butonWithFrame:CGRectMake(0, _lable.bottom, 100, 30) buttonType:UIButtonTypeCustom imageNamed:nil text:@"分享" textFont:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1]];
+     button.backgroundColor = [UIColor redColor];
+    [button addTarget:self action:@selector(share1) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [self.view addSubview:_imageview];
+    [self.view addSubview:_lable];
+ 
+    
+}
+#pragma mark - action
+-(void)share1{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56fa38a167e58eb61c000562"
+                                      shareText:@"你要分享的文字"
+                                     shareImage:[UIImage imageNamed:@"weixin"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil]
+                                       delegate:nil];
+    [UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskLandscape];
+}
+-(void)pushshare{
+    ShareMoneyController * vc = [[ShareMoneyController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

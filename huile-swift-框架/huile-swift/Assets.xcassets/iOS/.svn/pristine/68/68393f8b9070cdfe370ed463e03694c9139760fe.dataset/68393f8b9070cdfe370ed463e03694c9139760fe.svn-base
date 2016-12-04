@@ -1,0 +1,20 @@
+//
+//  NSString+UPString.m
+//  1210-b-自定义不等高cell
+//
+//  Created by admin on 15/12/11.
+//  Copyright © 2015年 wyzc. All rights reserved.
+//
+
+#import "NSString+UPString.h"
+
+@implementation NSString (UPString)
+
+-(CGSize)getRealSizeWithMaxSize:(CGSize)maxSize font:(UIFont *)font
+{
+     NSDictionary *dict=@{NSFontAttributeName:font};
+    return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
+
+}
+
+@end

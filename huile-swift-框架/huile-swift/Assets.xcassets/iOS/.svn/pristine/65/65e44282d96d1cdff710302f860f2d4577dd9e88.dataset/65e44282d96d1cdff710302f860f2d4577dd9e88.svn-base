@@ -1,0 +1,41 @@
+//
+//  MianheadCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "MianheadCell.h"
+
+@implementation MianheadCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
++(instancetype)cellWithTableView:(UITableView *)tableView {
+    static NSString *MineBigTitleCell = @"jfmineCell";
+    MianheadCell *cell = [tableView dequeueReusableCellWithIdentifier:MineBigTitleCell];
+    if (cell == nil) {
+        cell = [[MianheadCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MineBigTitleCell];
+    }
+    
+    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH*124/375, SCREENHEIGHT*30/667, SCREENWIDTH*64/375, SCREENHEIGHT*60/667)];
+    image.backgroundColor =[UIColor whiteColor];
+    UILabel * headlable = [[UILabel alloc] initWithFrame:CGRectMake(image.right+10*Width, image.top+30*Hight, 80, 50)];
+    headlable.text = @"月儿";
+    //    image.image = [UIImage imageNamed:@"beijing"];
+    [cell.contentView addSubview:image];
+    [cell.contentView addSubview:headlable];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+    
+}
+@end

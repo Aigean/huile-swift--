@@ -1,0 +1,50 @@
+//
+//  HomeScrollView.m
+//  SuperSecretary
+//
+//  Created by mac on 15/11/23.
+//  Copyright (c) 2015年 谢腾飞. All rights reserved.
+//
+
+#import "HomeScrollView.h"
+
+@implementation HomeScrollView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.minimumZoomScale = 0.5;
+        self.maximumZoomScale = 2;
+        //self.delegate=self;
+    }
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image
+{
+    if (self=[self initWithFrame:frame]) {
+        self.imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
+        self.imageView.backgroundColor = [UIColor redColor];
+        self.imageView.image=image;
+        [self addSubview:self.imageView];
+    }
+    return self;
+}
+
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageView;
+}
+
+-(void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    if (scrollView.zoomScale <= 1) {
+        _imageView.center = CGPointMake(scrollView.bounds.size.width/2, self.frame.origin.y/2);
+    }
+    if (scrollView.zoomScale > 1) {
+        _imageView.center = CGPointMake(scrollView.bounds.size.width/2, scrollView.frame.origin.y/2);
+    }
+}
+
+@end

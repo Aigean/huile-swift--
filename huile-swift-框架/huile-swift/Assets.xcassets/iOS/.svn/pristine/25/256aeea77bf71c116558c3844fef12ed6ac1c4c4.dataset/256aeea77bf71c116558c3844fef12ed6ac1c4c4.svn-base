@@ -1,0 +1,21 @@
+//
+//  ViewController.h
+//  AddressInfo
+//
+
+//  Copyright © 2016年  All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+typedef void(^ReturnCityName)(NSString *cityname);
+
+@interface ViewController : UIViewController
+
+@property (nonatomic, copy) ReturnCityName returnBlock;
+
+@property (nonatomic, strong)UILabel *currentCity;
+
+- (void)returnText:(ReturnCityName)block;
+@end
+

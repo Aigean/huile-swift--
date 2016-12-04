@@ -1,0 +1,40 @@
+//
+//  ChooseCell.m
+//  huile
+//
+//  Created by LZJ on 16/3/23.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "ChooseCell.h"
+
+@implementation ChooseCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    
+}
++(instancetype)cellWithTableView:(UITableView *)tableView Image:(NSString *)image text:(NSString *)text{
+    static NSString *MineBigTitleCell = @"mineCell";
+    ChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:MineBigTitleCell];
+    if (cell == nil) {
+        cell = [[ChooseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MineBigTitleCell];
+    }
+//    UIButton * btn = [UIButton butonWithFrame:CGRectMake(SCREENWIDTH-30*Width, 20*Hight, 20*Width, 20*Hight) buttonType:UIButtonTypeCustom imageNamed:@"xuanzhong" text:nil textFont:0 textColor:nil];
+//    [btn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateHighlighted];
+////    [btn setBackgroundImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
+//    [cell.contentView addSubview:btn];
+    cell.imageView.image = [UIImage imageNamed:image];
+    cell.textLabel.text =text;
+    cell.textLabel.textColor =[UIColor colorWithHex:@"333333" andAlpha:1];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+    
+}
+
+@end

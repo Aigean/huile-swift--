@@ -1,0 +1,14 @@
+//
+//  MianheadCell.h
+//  huile
+//
+//  Created by LZJ on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MianheadCell : UITableViewCell
++(instancetype)cellWithTableView:(UITableView *)tableView;
+
+@end

@@ -1,0 +1,58 @@
+//
+//  messageCell.m
+//  huile
+//
+//  Created by  周毅 on 16/3/28.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "messageCell.h"
+
+@implementation messageCell
+
+
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"messageCell";
+    messageCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[messageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        
+    }
+    return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        
+        [self initCell];
+    }
+    return self;
+}
+
+- (void)initCell
+{
+    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 75)];
+    [self addSubview:cellView];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 45, 45)];
+    imageView.image = [UIImage imageNamed:@"站位符"];
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = 22.5;
+    [cellView addSubview:imageView];
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(75, 15, SCREEN_WIDTH - 90, 25)];
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.text = @"消息标题";
+    [cellView addSubview:titleLabel];
+    
+    UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(75, 40, SCREEN_WIDTH - 90, 20)];
+    contentLabel.font = [UIFont systemFontOfSize:11];
+    contentLabel.text = @"消息内容消息内容消息内容消息内容消息内容";
+    [cellView addSubview:contentLabel];
+    
+}
+@end

@@ -1,0 +1,15 @@
+//
+//  UIButton+LzjButton.h
+//  huile
+//
+//  Created by LZJ on 16/3/19.
+//  Copyright © 2016年 whluojiachuanyi. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIButton (LzjButton)
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
++(UIButton *)butonWithFrame:(CGRect)frame buttonType:(UIButtonType)type imageNamed:(NSString *)name text:(NSString*)text textFont:(CGFloat)fontSize textColor:(UIColor *)textColor;
+
+@end

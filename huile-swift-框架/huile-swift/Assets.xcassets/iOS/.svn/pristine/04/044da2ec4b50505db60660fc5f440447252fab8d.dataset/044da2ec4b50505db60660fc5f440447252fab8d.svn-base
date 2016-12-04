@@ -1,0 +1,77 @@
+//
+//  CardController.m
+//  huile
+//
+//  Created by LZJ on 16/3/22.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "CardController.h"
+#import "AddoneController.h"
+#import "CardView.h"
+#import "CardViewCell.h"
+#import "CardinfoController.h"
+
+
+@interface CardController ()<UITableViewDataSource,UITableViewDelegate>
+
+@end
+
+@implementation CardController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setNav];
+    [self initSubview];
+    self.title =@"银行卡";
+}
+#pragma mark -- methods
+-(void)setNav{
+
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(push)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+-(void)initSubview{
+
+    _tableview = [UITableView initWithTableView:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64) withDelegate:self];
+    [self.view addSubview:_tableview];
+    
+    
+}
+#pragma mark -delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+    
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CardViewCell * cell = [CardViewCell cellWithTableView:tableView];
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 160*Hight;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CardinfoController * vc = [[CardinfoController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)push{
+    AddoneController *  vc = [[AddoneController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

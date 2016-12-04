@@ -1,0 +1,134 @@
+//
+//  mineViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "mineViewController.h"
+#import "CommonGroup.h"
+#import "CommonItem.h"
+#import "CommonCell.h"
+#import "CommonArrowItem.h"
+#import "CommonSwitchItem.h"
+#import "PersonalView.h"
+#import "PersonViewController.h"
+#import "OpinionViewController.h"
+#import "PaymentViewController.h"
+#import "AboutWeViewController.h"
+#import "ShareViewController.h"
+#import "CompanyViewController.h"
+#import "MyMoneyViewController.h"
+#import "SetUpViewController.h"
+#import "CollectViewController.h"
+//#include "MymoneyController.h"
+//#import "RecordController.h"
+//#import "ShareController.h"
+//#import "CooperateController.h"
+//#import "CollecteController.h"
+//#import "SetController.h"
+//#import "AboutController.h"
+//#import "FeedbackController.h"
+@interface mineViewController ()
+
+@end
+
+@implementation mineViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = TFColor(239, 239, 239, 1.0);
+    PersonalView *person= [[PersonalView alloc] initWithFrame:CGRectMake(0, 0, MainScreen_Width, MainScreen_Height/5)];
+    UITapGestureRecognizer * tapGestureHeadImageView= [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPress:)];
+    [person addGestureRecognizer:tapGestureHeadImageView];
+    
+    self.tableView.tableHeaderView = person;
+    [self setupGroups];
+}
+- (void)setupGroups
+{
+    [self setupGroup0];
+    [self setupGroup1];
+    [self setupGroup2];
+}
+
+- (void)setupGroup0
+{
+    CommonGroup *group = [CommonGroup group];
+    [self.groups addObject:group];
+    
+    CommonArrowItem *item1 = [CommonArrowItem itemWithTitle:@"我的钱包" icon:@"qianbao"];
+    item1.destVcClass = [MyMoneyViewController class];
+    
+    CommonArrowItem *item2 = [CommonArrowItem itemWithTitle:@"交易记录" icon:@"jiaoyijilu"];
+    item2.destVcClass = [PaymentViewController class];
+    
+    group.items = @[item1, item2];
+}
+
+- (void)setupGroup1
+{
+    CommonGroup *group = [CommonGroup group];
+    [self.groups addObject:group];
+    
+    CommonArrowItem *gameCenter = [CommonArrowItem itemWithTitle:@"收藏的店铺" icon:@"shoucang"];
+    gameCenter.destVcClass = [CollectViewController class];
+    [[CollectViewController alloc]init].title = @"收藏的店铺";
+    
+    CommonItem *video = [CommonArrowItem itemWithTitle:@"我要合作" icon:@"hezuo"];
+    video.destVcClass = [CompanyViewController class];
+
+    CommonArrowItem *app = [CommonArrowItem itemWithTitle:@"分享" icon:@"fenxiang"];
+    app.destVcClass = [ShareViewController class];
+    
+    group.items = @[ app,video,gameCenter];
+}
+
+- (void)setupGroup2
+{
+    CommonGroup *group = [CommonGroup group];
+    [self.groups addObject:group];
+    
+    CommonArrowItem *gameCenter = [CommonArrowItem itemWithTitle:@"设置" icon:@"shezhi"];
+    gameCenter.destVcClass = [SetUpViewController class];
+    
+    CommonArrowItem *app = [CommonArrowItem itemWithTitle:@"关于我们" icon:@"guanyu"];
+    app.destVcClass = [AboutWeViewController class];
+    
+    CommonArrowItem *app1 = [CommonArrowItem itemWithTitle:@"用户反馈" icon:@"fankui"];
+    app1.destVcClass = [OpinionViewController class];
+    
+    group.items = @[gameCenter, app,app1];
+}
+
+
+- (void)tapPress:(UIGestureRecognizer *)ges
+{
+    PersonViewController *person = [[PersonViewController alloc]init];
+    person.title = @"个人信息";
+    [self.navigationController pushViewController:person animated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

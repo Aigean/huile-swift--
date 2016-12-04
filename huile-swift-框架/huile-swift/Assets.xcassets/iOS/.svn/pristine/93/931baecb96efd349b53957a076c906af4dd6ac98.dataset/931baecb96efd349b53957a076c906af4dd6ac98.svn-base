@@ -1,0 +1,102 @@
+//
+//  SetUpViewController.m
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "SetUpViewController.h"
+#import "PasswordController.h"
+#import "PaypswController.h"
+
+@interface SetUpViewController ()
+
+@end
+
+@implementation SetUpViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //    [self initSubview];
+    [self initInformation];
+    self.title = @"设置";
+    self.view.backgroundColor = [UIColor colorWithHex:@"f2f2f2" andAlpha:1];
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+#pragma  mark -- methods
+//-(void)initSubview{
+//    _tableView = [UITableView initWithTableView:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT) withDelegate:self];
+//    [self.view addSubview:_tableView];
+//}
+-(void) initInformation{
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 10*Hight, SCREENWIDTH, 45*Hight)];
+    view1.backgroundColor = [UIColor whiteColor];
+    UILabel * lable1 = [UILabel labelWithFrame:CGRectMake(10*Width, 15*Hight, 100, 14*Hight) text:@"消息" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UISwitch * mineSwith = [[UISwitch alloc] initWithFrame:CGRectMake(SCREENWIDTH -60*Width, 5*Width, 110*Width, 30*Hight)];
+    [mineSwith setOn:YES];
+    [mineSwith addTarget:self action:@selector(switchIsChanged:) forControlEvents:UIControlEventTouchUpInside];
+    [view1 addSubview:lable1];
+    [view1 addSubview:mineSwith];
+    [self.view addSubview: view1];
+    UIView * view2 = [[UIView alloc] initWithFrame:CGRectMake(0, view1.bottom +10*Hight, SCREENWIDTH, 45*Hight)];
+    view2.backgroundColor = [UIColor whiteColor];
+    UILabel * lable2 = [UILabel labelWithFrame:CGRectMake(10*Width, 15*Hight, 100, 14*Hight) text:@"已绑定手机" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    _btn = [UIButton butonWithFrame:CGRectMake(SCREENWIDTH-150, 0, 150, 45*Hight) buttonType:UIButtonTypeCustom imageNamed:@"right arrow" text:@"123456789" textFont:10 textColor:[UIColor colorWithHex:@"999999" andAlpha:1]];
+    _btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [_btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+    //设置文字居左 －>向右移30
+    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 130, 0, 0);
+    [view2 addSubview:lable2];
+    [view2 addSubview:_btn];
+    [self.view addSubview:view2];
+    UIView * view3 = [[UIView alloc] initWithFrame:CGRectMake(0, view2.bottom +10*Hight, SCREENWIDTH, 45*Hight)];
+    view3.backgroundColor = [UIColor whiteColor];
+    UILabel * lable3 = [UILabel labelWithFrame:CGRectMake(10*Width, 15*Hight, 100, 14*Hight) text:@"登录密码修改" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UIButton * btn1 = [UIButton butonWithFrame:CGRectMake(SCREENWIDTH-210, 0, 200, 45*Hight) buttonType:UIButtonTypeCustom imageNamed:@"right arrow" text:nil textFont:0 textColor:nil];
+    btn1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [btn1 addTarget:self action:@selector(pushpassword) forControlEvents:UIControlEventTouchUpInside];
+    [view3 addSubview:lable3];
+    [view3 addSubview:btn1];
+    [self.view addSubview:view3];
+    UIView * view4 = [[UIView alloc] initWithFrame:CGRectMake(0, view3.bottom +1*Hight, SCREENWIDTH, 45*Hight)];
+    view4.backgroundColor = [UIColor whiteColor];
+    UILabel * lable4 = [UILabel labelWithFrame:CGRectMake(10*Width, 15*Hight, 100, 14*Hight) text:@"支付密码修改" font:14 textColor:[UIColor colorWithHex:@"333333" andAlpha:1] textAlignment:NSTextAlignmentLeft];
+    UIButton * btn2 = [UIButton butonWithFrame:CGRectMake(SCREENWIDTH-210, 0, 200, 45*Hight) buttonType:UIButtonTypeCustom imageNamed:@"right arrow" text:nil textFont:0 textColor:nil];
+    btn2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [btn2 addTarget:self action:@selector(paypassword) forControlEvents:UIControlEventTouchUpInside];
+    [view4 addSubview:lable4];
+    [view4 addSubview:btn2];
+    [self.view addSubview:view4];
+}
+
+-(void)switchIsChanged:(UISwitch *)Sender{
+    NSLog(@"Sender is=%@",Sender);
+    if([Sender isOn]){//如果开关状态为ON
+        NSLog(@"The switch is turned on.");
+    }else{
+        NSLog(@"The switch is turned off.");
+    }
+}
+#pragma mark - action
+-(void)pushpassword{
+    PasswordController * vc = [[PasswordController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)paypassword{
+    PaypswController * vc = [[PaypswController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+@end

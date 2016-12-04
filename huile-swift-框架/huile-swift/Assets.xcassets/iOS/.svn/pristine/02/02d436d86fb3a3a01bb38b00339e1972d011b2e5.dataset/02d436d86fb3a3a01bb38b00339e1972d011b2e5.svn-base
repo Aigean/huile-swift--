@@ -1,0 +1,80 @@
+//
+//  TabbarViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "TabbarViewController.h"
+#import "HomeViewController.h"
+#import "merchantViewController.h"
+#import "messageViewController.h"
+#import "mineViewController.h"
+#import "NavigationController.h"
+#import "UIColor+ColorWithHexAndAlpha.h"
+
+@implementation TabbarViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // 初始化tabbar
+    [self setupTabBar];
+    
+    // 初始化子控制器
+    [self setupAllChildViewController];
+}
+
+- (void)setupTabBar
+{
+    
+}
+
+- (void)setupAllChildViewController
+{
+    HomeViewController *homeVC = [[HomeViewController alloc]init];
+    [self setupChildViewController:homeVC title:@"首页" imageName:@"home" selectedImageName:@"home-full"];
+    merchantViewController *merchantVC = [[merchantViewController alloc]init];
+    [self setupChildViewController:merchantVC title:@"商家" imageName:@"merchant" selectedImageName:@"merchant-full"];
+    //merchantVC.view.tag = 1;
+    messageViewController *messageVC = [[messageViewController alloc]init];
+    [self setupChildViewController:messageVC title:@"消息" imageName:@"information" selectedImageName:@"information-full"];
+    mineViewController *mineVC = [[mineViewController alloc]init];
+    [self setupChildViewController:mineVC title:@"我的" imageName:@"my" selectedImageName:@"my-full"];
+    
+}
+
+- (void)setupChildViewController:(UIViewController *)controller title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName
+{
+    controller.tabBarItem.title = title;
+    controller.tabBarItem.image = [UIImage imageNamed:imageName];
+    //controller.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
+    UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
+   
+    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0) {
+        selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    controller.tabBarItem.selectedImage = selectedImage;
+    //controller.view.backgroundColor = TFColor(239, 239, 239, 1.0);
+    
+
+    // 设置文字的颜色
+    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+    //textAttrs[UITextAttributeTextColor] = [UIColor grayColor];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:11];
+    [controller.tabBarItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+    NSMutableDictionary *selectedTextAttrs = [NSMutableDictionary dictionary];
+    selectedTextAttrs[NSForegroundColorAttributeName] = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    [controller.tabBarItem setTitleTextAttributes:selectedTextAttrs forState:UIControlStateSelected];
+    
+
+    
+    // 包装导航器
+    NavigationController *nav = [[NavigationController alloc]initWithRootViewController:controller];
+    nav.view.backgroundColor = [UIColor whiteColor];
+    [self addChildViewController:nav];
+    
+}
+@end

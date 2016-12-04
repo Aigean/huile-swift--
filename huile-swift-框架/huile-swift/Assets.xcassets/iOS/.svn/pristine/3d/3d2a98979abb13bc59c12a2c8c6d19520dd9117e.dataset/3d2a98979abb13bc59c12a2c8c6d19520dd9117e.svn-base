@@ -1,0 +1,76 @@
+//
+//  OpinionViewController.m
+//  huile
+//
+//  Created by mac on 16/3/21.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#import "OpinionViewController.h"
+
+@interface OpinionViewController ()
+
+@end
+
+@implementation OpinionViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, MainScreen_Width - 20, MainScreen_Height/4)];
+    _textView.backgroundColor = [UIColor whiteColor];
+    _textView.textAlignment = 0;
+    _textView.layer.cornerRadius = 5;
+    _textView.font = [UIFont systemFontOfSize:15];
+    [self.view addSubview:_textView];
+    
+    _submitButton = [[UIButton alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(_textView.frame) + 40, MainScreen_Width - 20, 44)];
+    _submitButton.backgroundColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+    [_submitButton addTarget:self action:@selector(submitAction) forControlEvents:UIControlEventTouchUpInside];
+    _submitButton.layer.cornerRadius = 5;
+    [_submitButton setTitle:@"提交" forState:UIControlStateNormal];
+    [self.view addSubview:_submitButton];
+
+}
+
+- (void)submitAction{
+    
+    if (self.textView.text.length == 0) {
+        UIAlertView * alert=[[UIAlertView alloc] initWithTitle:nil message:@"您没有输入任何内容哦, 请输入您的意见和建议再提交" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        
+    }else {
+        self.textView.text = nil;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    [self.view endEditing:YES];
+//}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

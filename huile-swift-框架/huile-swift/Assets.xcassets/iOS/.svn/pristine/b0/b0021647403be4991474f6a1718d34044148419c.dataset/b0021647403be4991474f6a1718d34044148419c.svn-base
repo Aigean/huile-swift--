@@ -1,0 +1,297 @@
+//
+//  HomeViewController.m
+//  huile
+//
+//  Created by  周毅 on 16/3/17.
+//  Copyright © 2016年 Aigean. All rights reserved.
+//
+
+#define cellID @"cell"
+
+#import "HomeViewController.h"
+#import "UIColor+ColorWithHexAndAlpha.h"
+#import "HomeMenuCell.h"
+#import "Public.h"
+#import "SecondViewCell.h"
+#import "ThirdViewCell.h"
+#import "CollectTableViewCell.h"
+#import "CollectViewController.h"
+#import "ViewController.h"
+#import "ActivityViewController.h"
+#import "BoutiqueShopViewController.h"
+#import "MerchantDetailViewController.h"
+#import "NavigationController.h"
+#import "SweepViewController.h"
+
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,pushDelegate>
+//@property (nonatomic, strong) UIButton *leftBtn;
+
+@end
+
+@implementation HomeViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHex:@"fc5400" andAlpha:1.0f];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupNav];
+    [self setClassfiedInfo];
+    
+    [self initTableView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(action:) name:@"11" object:nil];
+    
+    
+}
+
+-(void)action:(NSNotification *)noti
+{
+    
+    [self.tabBarController setSelectedIndex:1];
+    
+}
+-(void)initTableView{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MainScreen_Width, MainScreen_Height-49-64) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"menuData" ofType:@"plist"];
+    _menuArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+}
+
+- (void)setupNav
+{
+    _leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftBtn.frame = CGRectMake(0, 0, 40, 35);
+    [_leftBtn setImage:[UIImage imageNamed:@"Down arrow"] forState:UIControlStateNormal];
+    //先设置按钮里面的内容居中
+    _leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    //设置文字居左 －>向左移35
+    [_leftBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+    //设置文字居左 －>向右移30
+    _leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+    [_leftBtn setTitle:@"武汉" forState:UIControlStateNormal];
+    _leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [_leftBtn addTarget:self action:@selector(cityChoseButtonClick:)forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftBtn];
+    UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    scanBtn.frame = CGRectMake(0, 0, 50, 35);
+    [scanBtn setImage:[UIImage imageNamed:@"scan"] forState:UIControlStateNormal];
+    [scanBtn addTarget:self action:@selector(scanButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:scanBtn];
+    
+    
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    searchBar.backgroundImage = [UIImage imageNamed:@""];
+    searchBar.placeholder = @"搜索";
+    self.navigationItem.titleView = searchBar;
+    
+}
+
+- (void)scanButtonClick
+{
+    SweepViewController *vc = [[SweepViewController alloc]init];
+    vc.title = @"扫一扫";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)cityChoseButtonClick:(id)sender {
+    NSLog(@"选择城市");
+    ViewController * cityVC = [[ViewController alloc] init];
+    cityVC.title = @"定位城市";
+    ViewController *vc=[[ViewController alloc]init];
+    
+    [vc returnText:^(NSString *cityname) {
+       [_leftBtn setTitle:cityname forState:0];
+        
+    }];
+    
+    [self.navigationController pushViewController:vc animated:NO];
+
+
+}
+
+- (void)setClassfiedInfo
+{
+    UIView *classfiedView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , (5/18)*SCREEN_WIDTH)];
+    classfiedView.backgroundColor = [UIColor yellowColor];
+    
+    [self.view addSubview:classfiedView];
+    
+}
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 5;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 3||section == 4) {
+        return 4;
+    }else{
+     return 1;
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        return MainScreen_Width/2+10;
+    }else if(indexPath.section == 1){
+      return MainScreen_Height/4;
+    }else if (indexPath.section == 2){
+        return MainScreen_Height/5;
+    }else if (indexPath.section == 3){
+        if (indexPath.row == 0) {
+            return 44;
+        }else{
+            return 100;
+        }
+    }else if(indexPath.section == 4){
+        if (indexPath.row == 0) {
+            return 35.0;
+        }else{
+            return 100.0;
+        }
+    }else{
+        return MainScreen_Height/4;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        static NSString *cellIndentifier = @"menucell";
+        HomeMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+        if (cell == nil) {
+            cell = [[HomeMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier menuArray:_menuArray];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else if(indexPath.section == 1){
+        SecondViewCell *cell = [SecondViewCell cellWithTableView:tableView];
+        cell.topNewsView.delegate = self;
+        return cell;
+    }else if(indexPath.section == 3){
+        if(indexPath.row == 0){
+            static NSString *cellIndentifier = @"cell3";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIndentifier];
+                
+            }
+            cell.imageView.image = [UIImage imageNamed:@"xindian"];
+            cell.textLabel.text = @"新店推荐";
+            cell.detailTextLabel.text = @"更多";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            return cell;
+        }else{
+
+            CollectTableViewCell *cell = [CollectTableViewCell cellWithTableView:tableView];
+            cell.numberLabel.hidden = YES;
+        return cell;
+        }
+        
+    }else if(indexPath.section == 4){
+        if(indexPath.row == 0){
+            static NSString *cellIndentifier = @"cell4";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIndentifier];
+            }
+            cell.imageView.image = [UIImage imageNamed:@"remen"];
+            cell.textLabel.text = @"附近热门";
+            cell.detailTextLabel.text = @"更多";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else{
+            
+            CollectTableViewCell *cell = [CollectTableViewCell cellWithTableView:tableView];
+            cell.activityLabel.hidden = YES;
+            
+            return cell;
+        }
+     }else{
+         ThirdViewCell *cell = [ThirdViewCell cellWithTableView:tableView];
+         [cell.leftbutton addTarget:self action:@selector(leftButtonClick) forControlEvents:UIControlEventTouchUpInside];
+         [cell.topbutton addTarget:self action:@selector(topbuttonClick) forControlEvents:UIControlEventTouchUpInside];
+         [cell.bottombutton addTarget:self action:@selector(bottombuttonClick) forControlEvents:UIControlEventTouchUpInside];
+         
+        return cell;
+    }
+
+}
+
+
+- (void)leftButtonClick
+{
+    ActivityViewController *vc = [[ActivityViewController alloc]init];
+    vc.title = @"活动1";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)topbuttonClick
+{
+    ActivityViewController *vc = [[ActivityViewController alloc]init];
+    vc.title = @"活动2";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)bottombuttonClick
+{
+    ActivityViewController *vc = [[ActivityViewController alloc]init];
+    vc.title = @"活动3";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 3){
+       if (indexPath.row ==0) {
+         CollectViewController *vc = [[CollectViewController alloc]init];
+         vc.title = @"新店推荐";
+         [self.navigationController pushViewController:vc animated:YES];
+       }else{
+           MerchantDetailViewController *vc = [[MerchantDetailViewController alloc]init];
+           [self.navigationController pushViewController:vc animated:YES];
+       }
+    }
+    if(indexPath.section == 4){
+        if (indexPath.row ==0) {
+            CollectViewController *vc = [[CollectViewController alloc]init];
+            vc.title = @"附近热门";
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            MerchantDetailViewController *vc = [[MerchantDetailViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+
+}
+- (void)pushController:(NSInteger)selectIndex
+{
+    NSLog(@"++++++++点击了第%ld",selectIndex);
+    BoutiqueShopViewController *vc = [[BoutiqueShopViewController alloc]init];
+    vc.title = @"精品店铺";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
+@end
